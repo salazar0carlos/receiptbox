@@ -3,9 +3,18 @@ import { OCRData } from '@/types';
 import { categorizeVendor } from './categorize';
 
 // Initialize Google Vision client
-// For production, set GOOGLE_APPLICATION_CREDENTIALS environment variable
-// pointing to your service account JSON file
-const vision = new ImageAnnotatorClient();
+// For local: set GOOGLE_APPLICATION_CREDENTIALS to path of service account JSON
+// For Vercel: set GOOGLE_APPLICATION_CREDENTIALS_JSON to the JSON content
+let vision: ImageAnnotatorClient;
+
+if (process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON) {
+  // Vercel/production: credentials from environment variable
+  const credentials = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON);
+  vision = new ImageAnnotatorClient({ credentials });
+} else {
+  // Local development: uses GOOGLE_APPLICATION_CREDENTIALS file path
+  vision = new ImageAnnotatorClient();
+}
 
 export async function extractReceiptData(imageBuffer: Buffer): Promise<OCRData> {
   try {
