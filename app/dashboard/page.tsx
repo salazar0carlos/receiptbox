@@ -112,34 +112,34 @@ export default function DashboardPage() {
     <div className="min-h-screen bg-white">
       <Navbar user={user} />
 
-      <div className="max-w-5xl mx-auto px-6 py-20">
+      <div className="max-w-6xl mx-auto px-6 py-32">
         {/* Header */}
-        <div className="mb-20 text-center">
-          <h1 className="text-6xl md:text-7xl font-bold text-gray-900 mb-6 tracking-[-0.02em]">Dashboard</h1>
-          <p className="text-2xl text-gray-600 font-light">Upload receipts and track your spending</p>
+        <div className="mb-32 text-center">
+          <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-gray-900 mb-8 tracking-[-0.03em]">Dashboard</h1>
+          <p className="text-2xl md:text-3xl text-gray-600 font-light">Upload receipts and track your spending</p>
         </div>
 
         {/* Sheet Connection Status */}
         {sheetConnections.length === 0 && (
-          <Card variant="bordered" padding="large" className="mb-20 bg-amber-50/50 border-amber-200">
-            <div className="flex flex-col md:flex-row items-start gap-8">
-              <div className="p-4 bg-amber-600 rounded-3xl shadow-md">
-                <FileSpreadsheet className="w-8 h-8 text-white" />
+          <Card variant="bordered" padding="large" className="mb-32 bg-amber-50/50 border-amber-200">
+            <div className="flex flex-col md:flex-row items-start gap-12">
+              <div className="p-5 bg-amber-600 rounded-3xl shadow-md">
+                <FileSpreadsheet className="w-10 h-10 text-white" />
               </div>
               <div className="flex-1">
-                <h3 className="text-2xl font-semibold text-gray-900 mb-4">
+                <h3 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-6 tracking-tight">
                   Connect Google Sheets
                 </h3>
-                <p className="text-xl text-gray-600 mb-8 leading-relaxed font-light">
+                <p className="text-xl md:text-2xl text-gray-600 mb-10 leading-relaxed font-light">
                   Connect a Google Sheet to automatically sync your receipt data. Choose from pre-built templates or connect an existing sheet.
                 </p>
                 <Button
                   variant="primary"
                   size="large"
                   onClick={() => router.push('/sheets/connect')}
-                  className="text-lg px-10 py-4"
+                  className="text-xl px-12 py-5"
                 >
-                  <Plus className="w-5 h-5 mr-2" />
+                  <Plus className="w-6 h-6 mr-2" />
                   Connect Sheet
                 </Button>
               </div>
@@ -150,7 +150,7 @@ export default function DashboardPage() {
         {/* Main Content */}
         {step === 'upload' && (
           <Card variant="shadow" padding="large">
-            <h2 className="text-4xl font-semibold text-gray-900 mb-12 text-center tracking-[-0.01em]">
+            <h2 className="text-4xl md:text-5xl font-semibold text-gray-900 mb-16 text-center tracking-tight">
               Upload Receipt
             </h2>
             <UploadZone onUploadComplete={handleUploadComplete} />
@@ -170,21 +170,21 @@ export default function DashboardPage() {
 
         {step === 'success' && (
           <Card variant="shadow" padding="large" className="text-center">
-            <div className="w-16 h-16 bg-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6">
-              <ReceiptIcon className="w-8 h-8 text-white" />
+            <div className="w-20 h-20 bg-emerald-600 rounded-full flex items-center justify-center mx-auto mb-8">
+              <ReceiptIcon className="w-10 h-10 text-white" />
             </div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
               Receipt Saved!
             </h2>
-            <p className="text-xl text-gray-600 mb-8">
+            <p className="text-xl md:text-2xl text-gray-600 mb-12 font-light">
               Your receipt has been saved to your library.
             </p>
-            <div className="flex gap-4 justify-center">
-              <Button onClick={handleStartNew}>
-                <Plus className="w-5 h-5 mr-2" />
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <Button size="large" onClick={handleStartNew} className="text-xl px-10 py-5">
+                <Plus className="w-6 h-6 mr-2" />
                 Upload Another
               </Button>
-              <Button variant="secondary" onClick={() => router.push('/library')}>
+              <Button size="large" variant="secondary" onClick={() => router.push('/library')} className="text-xl px-10 py-5">
                 View Library
               </Button>
             </div>
@@ -193,39 +193,39 @@ export default function DashboardPage() {
 
         {/* Quick Stats */}
         {step === 'upload' && (
-          <div className="grid md:grid-cols-3 gap-6 mt-8">
+          <div className="grid md:grid-cols-3 gap-8 mt-16">
             <Card variant="bordered" padding="medium">
-              <div className="flex items-center gap-4">
-                <div className="p-3 bg-emerald-100 rounded-lg">
-                  <ReceiptIcon className="w-6 h-6 text-emerald-600" />
+              <div className="flex items-center gap-6">
+                <div className="p-4 bg-emerald-100 rounded-2xl">
+                  <ReceiptIcon className="w-8 h-8 text-emerald-600" />
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">This Month</p>
-                  <p className="text-2xl font-bold text-gray-900">0</p>
+                  <p className="text-base text-gray-600 font-light mb-1">This Month</p>
+                  <p className="text-3xl font-bold text-gray-900">0</p>
                 </div>
               </div>
             </Card>
 
             <Card variant="bordered" padding="medium">
-              <div className="flex items-center gap-4">
-                <div className="p-3 bg-emerald-100 rounded-lg">
-                  <FileSpreadsheet className="w-6 h-6 text-emerald-600" />
+              <div className="flex items-center gap-6">
+                <div className="p-4 bg-emerald-100 rounded-2xl">
+                  <FileSpreadsheet className="w-8 h-8 text-emerald-600" />
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">Sheets Connected</p>
-                  <p className="text-2xl font-bold text-gray-900">{sheetConnections.length}</p>
+                  <p className="text-base text-gray-600 font-light mb-1">Sheets Connected</p>
+                  <p className="text-3xl font-bold text-gray-900">{sheetConnections.length}</p>
                 </div>
               </div>
             </Card>
 
             <Card variant="bordered" padding="medium">
-              <div className="flex items-center gap-4">
-                <div className="p-3 bg-emerald-100 rounded-lg">
-                  <ReceiptIcon className="w-6 h-6 text-emerald-600" />
+              <div className="flex items-center gap-6">
+                <div className="p-4 bg-emerald-100 rounded-2xl">
+                  <ReceiptIcon className="w-8 h-8 text-emerald-600" />
                 </div>
                 <div>
-                  <p className="text-sm text-gray-600">Total Receipts</p>
-                  <p className="text-2xl font-bold text-gray-900">0</p>
+                  <p className="text-base text-gray-600 font-light mb-1">Total Receipts</p>
+                  <p className="text-3xl font-bold text-gray-900">0</p>
                 </div>
               </div>
             </Card>

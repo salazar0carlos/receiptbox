@@ -30,22 +30,22 @@ export default function Navbar({ user }: NavbarProps) {
   return (
     <nav className="bg-white/80 backdrop-blur-xl border-b border-gray-100 sticky top-0 z-40 shadow-sm">
       <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-24">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 text-xl font-bold text-gray-900">
-            <div className="p-2.5 bg-emerald-600 rounded-xl shadow-sm">
-              <Receipt className="w-5 h-5 text-white" />
+          <Link href="/" className="flex items-center gap-4 text-xl font-bold text-gray-900">
+            <div className="p-3 bg-emerald-600 rounded-xl shadow-sm">
+              <Receipt className="w-6 h-6 text-white" />
             </div>
-            <span className="text-lg">ReceiptBox</span>
+            <span className="text-xl">ReceiptBox</span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-10">
+          <div className="hidden md:flex items-center gap-12">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className={`text-[17px] font-medium transition-colors hover:text-emerald-600 ${
+                className={`text-lg font-medium transition-colors hover:text-emerald-600 ${
                   pathname === item.href
                     ? 'text-emerald-600'
                     : 'text-gray-700'
@@ -57,10 +57,10 @@ export default function Navbar({ user }: NavbarProps) {
           </div>
 
           {/* Desktop Auth */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-5">
             {user ? (
               <>
-                <span className="text-[15px] text-gray-600">{user.email}</span>
+                <span className="text-base text-gray-600 font-light">{user.email}</span>
                 <form action="/api/auth/logout" method="POST">
                   <Button variant="secondary" size="small" type="submit">
                     Log Out
@@ -100,12 +100,12 @@ export default function Navbar({ user }: NavbarProps) {
       {/* Mobile Menu */}
       {mobileMenuOpen && (
         <div className="md:hidden border-t border-gray-200 bg-white">
-          <div className="px-4 py-4 space-y-3">
+          <div className="px-6 py-6 space-y-4">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className={`block py-2 text-sm font-medium ${
+                className={`block py-3 text-base font-medium ${
                   pathname === item.href
                     ? 'text-emerald-600'
                     : 'text-gray-600'
@@ -115,10 +115,10 @@ export default function Navbar({ user }: NavbarProps) {
                 {item.name}
               </Link>
             ))}
-            <div className="pt-4 border-t border-gray-200 space-y-2">
+            <div className="pt-6 border-t border-gray-200 space-y-3">
               {user ? (
                 <>
-                  <p className="text-sm text-gray-600">{user.email}</p>
+                  <p className="text-base text-gray-600 font-light">{user.email}</p>
                   <form action="/api/auth/logout" method="POST">
                     <Button variant="secondary" size="small" className="w-full" type="submit">
                       Log Out
