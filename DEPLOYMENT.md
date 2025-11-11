@@ -22,20 +22,20 @@ This guide will walk you through deploying ReceiptBox to production.
    - Region: Choose closest to your users
 4. Wait for project to provision (~2 minutes)
 
-### 1.2 Run Database Schema
+### 1.2 Create Storage Bucket
+1. Go to **Storage** in Supabase dashboard
+2. Click "New Bucket"
+3. Name: `receipts`
+4. **Important:** Set to **Private** (not public)
+5. Click "Create Bucket"
+
+### 1.3 Run Database Schema
 1. In your Supabase dashboard, go to **SQL Editor**
 2. Click "New Query"
 3. Copy the entire contents of `database-schema.sql` from this repo
 4. Paste into the SQL editor
 5. Click "Run" or press Cmd/Ctrl + Enter
-6. ✅ You should see success messages for all tables
-
-### 1.3 Create Storage Bucket (if not auto-created)
-1. Go to **Storage** in Supabase dashboard
-2. If "receipts" bucket doesn't exist, click "New Bucket"
-3. Name: `receipts`
-4. **Important:** Make it **private** (not public)
-5. Click "Create Bucket"
+6. ✅ You should see success messages for all tables and policies
 
 ### 1.4 Enable Email Authentication
 1. Go to **Authentication** → **Providers**

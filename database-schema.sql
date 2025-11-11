@@ -112,9 +112,11 @@ CREATE POLICY "users_own_subscriptions" ON subscriptions FOR SELECT USING (auth.
 CREATE POLICY "users_own_usage" ON usage_logs FOR SELECT USING (auth.uid() = user_id);
 
 -- Storage bucket for receipts
-INSERT INTO storage.buckets (id, name, public) VALUES ('receipts', 'receipts', false);
+-- NOTE: Create the storage bucket via Supabase Dashboard:
+-- Go to Storage → New Bucket → Name: "receipts", Public: OFF (private)
+-- Then run the policy below:
 
--- Storage policy for receipts
+-- Storage policy for receipts (run after creating bucket via UI)
 CREATE POLICY "users_own_receipt_images" ON storage.objects FOR ALL USING (
   bucket_id = 'receipts' AND auth.uid()::text = (storage.foldername(name))[1]
 );
