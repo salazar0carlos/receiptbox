@@ -7,6 +7,8 @@ import UploadZone from '@/components/UploadZone';
 import ReceiptReview from '@/components/ReceiptReview';
 import Button from '@/components/Button';
 import Card from '@/components/Card';
+import WelcomeModal from '@/components/WelcomeModal';
+import KeyboardShortcuts from '@/components/KeyboardShortcuts';
 import { FileSpreadsheet, Receipt as ReceiptIcon, Plus } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -229,6 +231,10 @@ export default function DashboardPage() {
           </div>
         )}
       </div>
+
+      {/* Welcome Modal and Keyboard Shortcuts */}
+      <WelcomeModal />
+      <KeyboardShortcuts />
     </div>
   );
 }
