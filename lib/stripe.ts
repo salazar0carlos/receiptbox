@@ -1,9 +1,20 @@
 import Stripe from 'stripe';
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-10-29.clover',
-  typescript: true,
-});
+// Initialize Stripe only if API key is available
+// This allows the build to succeed even without Stripe configured
+export const stripe = process.env.STRIPE_SECRET_KEY
+  ? new Stripe(process.env.STRIPE_SECRET_KEY, {
+      apiVersion: '2025-10-29.clover',
+      typescript: true,
+    })
+  : null;
+
+function getStripe(): Stripe {
+  if (!stripe) {
+    throw new Error('Stripe is not configured. Please set STRIPE_SECRET_KEY environment variable.');
+  }
+  return stripe;
+}
 
 export const PLAN_LIMITS = {
   free: {
@@ -35,7 +46,8 @@ export async function createCheckoutSession(
   priceId: string,
   customerEmail: string
 ): Promise<string> {
-  const session = await stripe.checkout.sessions.create({
+  const stripeClient = getStripe();
+  const session = await stripeClient.checkout.sessions.create({
     mode: 'subscription',
     payment_method_types: ['card'],
     line_items: [
