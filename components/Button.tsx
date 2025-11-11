@@ -17,18 +17,18 @@ export default function Button({
   disabled,
   ...props
 }: ButtonProps) {
-  const baseStyles = 'inline-flex items-center justify-center font-medium transition-all rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
+  const baseStyles = 'inline-flex items-center justify-center font-semibold transition-all rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 disabled:opacity-40 disabled:cursor-not-allowed';
 
   const variantStyles = {
-    primary: 'bg-emerald-600 text-white hover:shadow-lg active:scale-95',
-    secondary: 'bg-white text-gray-900 border border-gray-900 hover:shadow-md active:scale-95',
+    primary: 'bg-emerald-600 text-white hover:bg-emerald-700 shadow-sm hover:shadow-md active:scale-[0.98]',
+    secondary: 'bg-white text-gray-900 border-2 border-gray-200 hover:border-gray-300 hover:bg-gray-50 shadow-sm active:scale-[0.98]',
     ghost: 'bg-transparent text-gray-700 hover:bg-gray-100 active:bg-gray-200',
   };
 
   const sizeStyles = {
-    small: 'py-2 px-4 text-sm',
-    medium: 'py-3 px-6 text-base',
-    large: 'py-4 px-8 text-lg',
+    small: 'py-2.5 px-5 text-[15px]',
+    medium: 'py-3 px-7 text-[17px]',
+    large: 'py-4 px-9 text-[19px]',
   };
 
   return (

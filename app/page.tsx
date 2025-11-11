@@ -6,54 +6,54 @@ import { Receipt, Upload, Sparkles, FileSpreadsheet, Check } from 'lucide-react'
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       <Navbar />
 
       {/* Hero Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-24">
-        <div className="text-center max-w-3xl mx-auto">
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+      <section className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 pt-32 pb-32">
+        <div className="text-center max-w-4xl mx-auto">
+          <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-gray-900 mb-8 leading-[1.05] tracking-tight">
             Track every purchase.
             <br />
-            Household, business, life.
+            <span className="text-emerald-600">Household, business, life.</span>
           </h1>
-          <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+          <p className="text-xl md:text-2xl text-gray-600 mb-12 leading-relaxed max-w-2xl mx-auto">
             Upload receipts. AI extracts data. Writes to your Google Sheet.
             <br />
-            Zero manual entry.
+            <span className="font-medium">Zero manual entry.</span>
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
             <Link href="/signup">
-              <Button size="large" className="min-w-[200px]">
+              <Button size="large" className="min-w-[220px]">
                 Start Free
               </Button>
             </Link>
             <Link href="#how-it-works">
-              <Button size="large" variant="secondary" className="min-w-[200px]">
+              <Button size="large" variant="secondary" className="min-w-[220px]">
                 See How It Works
               </Button>
             </Link>
           </div>
-          <p className="text-sm text-gray-500 mt-6">
+          <p className="text-[15px] text-gray-500 mt-8">
             Free plan includes 50 receipts/month. No credit card required.
           </p>
         </div>
       </section>
 
       {/* Problem Section */}
-      <section className="bg-gray-50 py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">
+      <section className="bg-white py-32">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-10 leading-tight">
               Stop losing receipts
             </h2>
-            <p className="text-xl text-gray-600 leading-relaxed">
+            <p className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-6">
               You're losing money on lost receipts, forgotten expenses, and manual spreadsheet hell.
             </p>
-            <p className="text-xl text-gray-600 mt-4 leading-relaxed">
+            <p className="text-xl md:text-2xl text-gray-600 leading-relaxed mb-12">
               ReceiptBox captures every receipt, extracts the data automatically, and writes it directly to your Google Sheet.
             </p>
-            <p className="text-2xl font-semibold text-emerald-600 mt-8">
+            <p className="text-3xl md:text-4xl font-semibold text-emerald-600">
               Your spending, finally organized.
             </p>
           </div>
@@ -61,53 +61,53 @@ export default function HomePage() {
       </section>
 
       {/* How It Works */}
-      <section id="how-it-works" className="py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+      <section id="how-it-works" className="py-32 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="text-center mb-20">
+            <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
               How It Works
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl md:text-2xl text-gray-600">
               Three steps. That's it.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
             {/* Step 1 */}
-            <Card variant="bordered" padding="large" className="text-center">
-              <div className="w-16 h-16 bg-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Upload className="w-8 h-8 text-white" />
+            <Card variant="default" padding="large" className="text-center">
+              <div className="w-20 h-20 bg-emerald-600 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-lg">
+                <Upload className="w-10 h-10 text-white" />
               </div>
-              <h3 className="text-2xl font-semibold text-gray-900 mb-3">
+              <h3 className="text-2xl font-semibold text-gray-900 mb-4">
                 1. Upload receipt
               </h3>
-              <p className="text-gray-600">
+              <p className="text-lg text-gray-600 leading-relaxed">
                 Drag-drop, click to upload, or use your phone camera. Works with photos and PDFs.
               </p>
             </Card>
 
             {/* Step 2 */}
-            <Card variant="bordered" padding="large" className="text-center">
-              <div className="w-16 h-16 bg-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Sparkles className="w-8 h-8 text-white" />
+            <Card variant="default" padding="large" className="text-center">
+              <div className="w-20 h-20 bg-emerald-600 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-lg">
+                <Sparkles className="w-10 h-10 text-white" />
               </div>
-              <h3 className="text-2xl font-semibold text-gray-900 mb-3">
+              <h3 className="text-2xl font-semibold text-gray-900 mb-4">
                 2. AI extracts data
               </h3>
-              <p className="text-gray-600">
+              <p className="text-lg text-gray-600 leading-relaxed">
                 Vendor, amount, date, tax, category. All extracted automatically. Review and edit if needed.
               </p>
             </Card>
 
             {/* Step 3 */}
-            <Card variant="bordered" padding="large" className="text-center">
-              <div className="w-16 h-16 bg-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6">
-                <FileSpreadsheet className="w-8 h-8 text-white" />
+            <Card variant="default" padding="large" className="text-center">
+              <div className="w-20 h-20 bg-emerald-600 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-lg">
+                <FileSpreadsheet className="w-10 h-10 text-white" />
               </div>
-              <h3 className="text-2xl font-semibold text-gray-900 mb-3">
+              <h3 className="text-2xl font-semibold text-gray-900 mb-4">
                 3. Syncs to your Sheet
               </h3>
-              <p className="text-gray-600">
+              <p className="text-lg text-gray-600 leading-relaxed">
                 One click. Data writes directly to your Google Sheet. See it update in real-time.
               </p>
             </Card>
@@ -116,36 +116,36 @@ export default function HomePage() {
       </section>
 
       {/* Features */}
-      <section className="bg-gray-50 py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+      <section className="bg-white py-32">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+          <div className="grid md:grid-cols-2 gap-16 max-w-5xl mx-auto">
             <div>
-              <div className="w-12 h-12 bg-emerald-600 rounded-lg flex items-center justify-center mb-4">
-                <Sparkles className="w-6 h-6 text-white" />
+              <div className="w-16 h-16 bg-emerald-600 rounded-2xl flex items-center justify-center mb-6 shadow-md">
+                <Sparkles className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-2xl font-semibold text-gray-900 mb-3">
+              <h3 className="text-3xl font-semibold text-gray-900 mb-5">
                 Smart Categorization
               </h3>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-lg text-gray-600 leading-relaxed">
                 Costco → Groceries. Shell → Gas. Amazon → Shopping. ReceiptBox auto-categorizes based on vendor. Add your own custom categories and mappings.
               </p>
             </div>
 
             <div>
-              <div className="w-12 h-12 bg-emerald-600 rounded-lg flex items-center justify-center mb-4">
-                <FileSpreadsheet className="w-6 h-6 text-white" />
+              <div className="w-16 h-16 bg-emerald-600 rounded-2xl flex items-center justify-center mb-6 shadow-md">
+                <FileSpreadsheet className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-2xl font-semibold text-gray-900 mb-3">
+              <h3 className="text-3xl font-semibold text-gray-900 mb-5">
                 Google Sheets Native
               </h3>
-              <p className="text-gray-600 leading-relaxed">
+              <p className="text-lg text-gray-600 leading-relaxed">
                 Your Google Sheet IS your database. You control your data, use your own formulas, share with who you want. We just make it easy to fill your sheet.
               </p>
             </div>
 
             <div>
-              <div className="w-12 h-12 bg-emerald-600 rounded-lg flex items-center justify-center mb-4">
-                <Receipt className="w-6 h-6 text-white" />
+              <div className="w-16 h-16 bg-emerald-600 rounded-2xl flex items-center justify-center mb-6 shadow-md">
+                <Receipt className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-2xl font-semibold text-gray-900 mb-3">
                 Receipt Library

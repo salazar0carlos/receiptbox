@@ -28,27 +28,27 @@ export default function Navbar({ user }: NavbarProps) {
       ];
 
   return (
-    <nav className="bg-white border-b border-gray-200 sticky top-0 z-40">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+    <nav className="bg-white/80 backdrop-blur-xl border-b border-gray-100 sticky top-0 z-40 shadow-sm">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 text-xl font-bold text-gray-900">
-            <div className="p-2 bg-emerald-600 rounded-lg">
+          <Link href="/" className="flex items-center gap-3 text-xl font-bold text-gray-900">
+            <div className="p-2.5 bg-emerald-600 rounded-xl shadow-sm">
               <Receipt className="w-5 h-5 text-white" />
             </div>
-            ReceiptBox
+            <span className="text-lg">ReceiptBox</span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-10">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className={`text-sm font-medium transition-colors hover:text-emerald-600 ${
+                className={`text-[17px] font-medium transition-colors hover:text-emerald-600 ${
                   pathname === item.href
                     ? 'text-emerald-600'
-                    : 'text-gray-600'
+                    : 'text-gray-700'
                 }`}
               >
                 {item.name}
@@ -57,10 +57,10 @@ export default function Navbar({ user }: NavbarProps) {
           </div>
 
           {/* Desktop Auth */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-4">
             {user ? (
               <>
-                <span className="text-sm text-gray-600">{user.email}</span>
+                <span className="text-[15px] text-gray-600">{user.email}</span>
                 <form action="/api/auth/logout" method="POST">
                   <Button variant="secondary" size="small" type="submit">
                     Log Out

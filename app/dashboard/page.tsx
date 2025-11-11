@@ -109,36 +109,36 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <Navbar user={user} />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-12">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Dashboard</h1>
-          <p className="text-gray-600">Upload receipts and track your spending</p>
+        <div className="mb-12">
+          <h1 className="text-5xl font-bold text-gray-900 mb-4">Dashboard</h1>
+          <p className="text-xl text-gray-600">Upload receipts and track your spending</p>
         </div>
 
         {/* Sheet Connection Status */}
         {sheetConnections.length === 0 && (
-          <Card variant="bordered" padding="medium" className="mb-8 bg-yellow-50 border-yellow-200">
-            <div className="flex items-start gap-4">
-              <div className="p-2 bg-yellow-600 rounded-lg">
-                <FileSpreadsheet className="w-6 h-6 text-white" />
+          <Card variant="bordered" padding="large" className="mb-12 bg-amber-50/50 border-amber-200">
+            <div className="flex items-start gap-6">
+              <div className="p-3 bg-amber-600 rounded-2xl shadow-md">
+                <FileSpreadsheet className="w-7 h-7 text-white" />
               </div>
               <div className="flex-1">
-                <h3 className="font-semibold text-gray-900 mb-1">
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">
                   Connect Google Sheets
                 </h3>
-                <p className="text-gray-600 mb-4">
+                <p className="text-lg text-gray-600 mb-6 leading-relaxed">
                   Connect a Google Sheet to automatically sync your receipt data. Choose from pre-built templates or connect an existing sheet.
                 </p>
                 <Button
                   variant="primary"
-                  size="small"
+                  size="medium"
                   onClick={() => router.push('/sheets/connect')}
                 >
-                  <Plus className="w-4 h-4 mr-2" />
+                  <Plus className="w-5 h-5 mr-2" />
                   Connect Sheet
                 </Button>
               </div>
@@ -149,7 +149,7 @@ export default function DashboardPage() {
         {/* Main Content */}
         {step === 'upload' && (
           <Card variant="shadow" padding="large">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">
+            <h2 className="text-3xl font-semibold text-gray-900 mb-8">
               Upload Receipt
             </h2>
             <UploadZone onUploadComplete={handleUploadComplete} />
