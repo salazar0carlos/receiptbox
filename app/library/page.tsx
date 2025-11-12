@@ -139,9 +139,9 @@ export default function LibraryPage() {
     return (
       <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #1e1b4b 0%, #581c87 50%, #1e1b4b 100%)' }}>
         <Navbar user={user} />
-        <div style={{ maxWidth: '1400px', margin: '0 auto', padding: 'var(--space-8) var(--space-6)' }}>
+        <div style={{ maxWidth: '1400px', margin: '0 auto', padding: 'var(--space-4) var(--space-4)' }}>
           {view === 'grid' ? (
-            <div className="grid grid-cols-3" style={{ gap: 'var(--space-6)' }}>
+            <div className="grid grid-cols-3" style={{ gap: 'var(--space-4)' }}>
               {[1, 2, 3, 4, 5, 6].map((i) => (
                 <SkeletonCard key={i} />
               ))}
@@ -158,12 +158,12 @@ export default function LibraryPage() {
     <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #1e1b4b 0%, #581c87 50%, #1e1b4b 100%)' }}>
       <Navbar user={user} />
 
-      <div style={{ maxWidth: '1400px', margin: '0 auto', padding: 'var(--space-8) var(--space-6)' }}>
+      <div style={{ maxWidth: '1400px', margin: '0 auto', padding: 'var(--space-4) var(--space-4)' }}>
         {/* Header */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 'var(--space-8)', flexWrap: 'wrap', gap: 'var(--space-4)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 'var(--space-6)', flexWrap: 'wrap', gap: 'var(--space-3)' }}>
           <div>
-            <h1 style={{ fontSize: 'var(--text-4xl)', fontWeight: 'var(--font-bold)', color: 'white', marginBottom: 'var(--space-2)' }}>Receipt Library</h1>
-            <p style={{ fontSize: 'var(--text-lg)', color: 'rgba(255,255,255,0.7)' }}>
+            <h1 style={{ fontSize: 'var(--text-3xl)', fontWeight: 'var(--font-bold)', color: 'white', marginBottom: 'var(--space-1)' }}>Receipt Library</h1>
+            <p style={{ fontSize: 'var(--text-base)', color: 'rgba(255,255,255,0.7)' }}>
               {filteredReceipts.length} {filteredReceipts.length === 1 ? 'receipt' : 'receipts'}
               {selectedReceipts.size > 0 && ` • ${selectedReceipts.size} selected`}
             </p>
@@ -296,7 +296,7 @@ export default function LibraryPage() {
                     checked={selectedReceipts.has(receipt.id)}
                     onChange={() => toggleSelectReceipt(receipt.id)}
                     onClick={(e) => e.stopPropagation()}
-                    style={{ width: '20px', height: '20px', cursor: 'pointer', accentColor: 'var(--primary-purple)' }}
+                    style={{ width: '24px', height: '24px', minWidth: '24px', minHeight: '24px', cursor: 'pointer', accentColor: 'var(--primary-purple)' }}
                   />
                 </div>
 
@@ -362,7 +362,7 @@ export default function LibraryPage() {
                         type="checkbox"
                         checked={selectedReceipts.size === filteredReceipts.length}
                         onChange={selectAll}
-                        style={{ width: '20px', height: '20px', cursor: 'pointer', accentColor: 'var(--primary-purple)' }}
+                        style={{ width: '24px', height: '24px', minWidth: '24px', minHeight: '24px', cursor: 'pointer', accentColor: 'var(--primary-purple)' }}
                       />
                     </th>
                     <th style={{ padding: 'var(--space-3) var(--space-6)', textAlign: 'left', fontSize: 'var(--text-xs)', fontWeight: 'var(--font-medium)', color: 'rgba(255,255,255,0.7)', textTransform: 'uppercase' }}>Date</th>
@@ -387,7 +387,7 @@ export default function LibraryPage() {
                           type="checkbox"
                           checked={selectedReceipts.has(receipt.id)}
                           onChange={() => toggleSelectReceipt(receipt.id)}
-                          style={{ width: '20px', height: '20px', cursor: 'pointer', accentColor: 'var(--primary-purple)' }}
+                          style={{ width: '24px', height: '24px', minWidth: '24px', minHeight: '24px', cursor: 'pointer', accentColor: 'var(--primary-purple)' }}
                         />
                       </td>
                       <td style={{ padding: 'var(--space-4) var(--space-6)', whiteSpace: 'nowrap', fontSize: 'var(--text-sm)', color: 'white' }}>

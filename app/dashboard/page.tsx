@@ -112,38 +112,38 @@ export default function DashboardPage() {
     <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #1e1b4b 0%, #581c87 50%, #1e1b4b 100%)' }}>
       <Navbar user={user} />
 
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: 'var(--space-6) var(--space-6) var(--space-12)' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: 'var(--space-4) var(--space-4) var(--space-12)' }}>
         {/* Header */}
-        <div style={{ marginBottom: 'var(--space-12)', textAlign: 'center', paddingTop: 'var(--space-16)' }}>
-          <h1 style={{ fontSize: 'var(--text-5xl)', fontWeight: 'var(--font-bold)', color: 'white', marginBottom: 'var(--space-4)' }}>
+        <div style={{ marginBottom: 'var(--space-8)', textAlign: 'center', paddingTop: 'var(--space-8)' }}>
+          <h1 style={{ fontSize: 'var(--text-4xl)', fontWeight: 'var(--font-bold)', color: 'white', marginBottom: 'var(--space-3)' }}>
             Dashboard
           </h1>
-          <p style={{ fontSize: 'var(--text-xl)', color: 'rgba(255,255,255,0.8)' }}>
+          <p style={{ fontSize: 'var(--text-lg)', color: 'rgba(255,255,255,0.8)' }}>
             Upload receipts and track your spending
           </p>
         </div>
 
         {/* Sheet Connection Status */}
         {sheetConnections.length === 0 && (
-          <div className="glass-strong" style={{ padding: 'var(--space-8)', borderRadius: 'var(--radius-2xl)', border: '1px solid rgba(255,255,255,0.2)', marginBottom: 'var(--space-12)' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
+          <div className="glass-strong" style={{ padding: 'var(--space-6)', borderRadius: 'var(--radius-2xl)', border: '1px solid rgba(255,255,255,0.2)', marginBottom: 'var(--space-8)' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
               <div style={{
-                width: '56px',
-                height: '56px',
+                width: '48px',
+                height: '48px',
                 background: 'linear-gradient(135deg, var(--primary-purple), var(--primary-pink))',
-                borderRadius: 'var(--radius-2xl)',
+                borderRadius: 'var(--radius-xl)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 boxShadow: '0 10px 30px rgba(168, 85, 247, 0.3)'
               }}>
-                <FileSpreadsheet className="w-8 h-8 text-white" />
+                <FileSpreadsheet className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h3 style={{ fontSize: 'var(--text-2xl)', fontWeight: 'var(--font-semibold)', color: 'white', marginBottom: 'var(--space-3)' }}>
+                <h3 style={{ fontSize: 'var(--text-xl)', fontWeight: 'var(--font-semibold)', color: 'white', marginBottom: 'var(--space-2)' }}>
                   Connect Google Sheets
                 </h3>
-                <p style={{ fontSize: 'var(--text-lg)', color: 'rgba(255,255,255,0.8)', marginBottom: 'var(--space-6)', lineHeight: 'var(--leading-relaxed)' }}>
+                <p style={{ fontSize: 'var(--text-base)', color: 'rgba(255,255,255,0.8)', marginBottom: 'var(--space-4)', lineHeight: 'var(--leading-relaxed)' }}>
                   Connect a Google Sheet to automatically sync your receipt data. Choose from pre-built templates or connect an existing sheet.
                 </p>
                 <Button
@@ -165,8 +165,8 @@ export default function DashboardPage() {
 
         {/* Main Content */}
         {step === 'upload' && (
-          <div className="glass-strong" style={{ padding: 'var(--space-8)', borderRadius: 'var(--radius-2xl)', border: '1px solid rgba(255,255,255,0.2)' }}>
-            <h2 style={{ fontSize: 'var(--text-3xl)', fontWeight: 'var(--font-semibold)', color: 'white', marginBottom: 'var(--space-8)', textAlign: 'center' }}>
+          <div className="glass-strong" style={{ padding: 'var(--space-6)', borderRadius: 'var(--radius-2xl)', border: '1px solid rgba(255,255,255,0.2)' }}>
+            <h2 style={{ fontSize: 'var(--text-2xl)', fontWeight: 'var(--font-semibold)', color: 'white', marginBottom: 'var(--space-6)', textAlign: 'center' }}>
               Upload Receipt
             </h2>
             <UploadZone onUploadComplete={handleUploadComplete} />
@@ -174,7 +174,7 @@ export default function DashboardPage() {
         )}
 
         {step === 'review' && receiptData && (
-          <div className="glass-strong" style={{ padding: 'var(--space-8)', borderRadius: 'var(--radius-2xl)', border: '1px solid rgba(255,255,255,0.2)' }}>
+          <div className="glass-strong" style={{ padding: 'var(--space-6)', borderRadius: 'var(--radius-2xl)', border: '1px solid rgba(255,255,255,0.2)' }}>
             <ReceiptReview
               ocrData={receiptData.ocrData}
               imageUrl={receiptData.imageUrl}
@@ -185,7 +185,7 @@ export default function DashboardPage() {
         )}
 
         {step === 'success' && (
-          <div className="glass-strong" style={{ padding: 'var(--space-8)', borderRadius: 'var(--radius-2xl)', border: '1px solid rgba(255,255,255,0.2)', textAlign: 'center' }}>
+          <div className="glass-strong" style={{ padding: 'var(--space-6)', borderRadius: 'var(--radius-2xl)', border: '1px solid rgba(255,255,255,0.2)', textAlign: 'center' }}>
             <div style={{
               width: '80px',
               height: '80px',

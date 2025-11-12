@@ -5,6 +5,7 @@ import { useDropzone } from 'react-dropzone';
 import { Upload, X, Loader2 } from 'lucide-react';
 import Button from './Button';
 import { toast } from 'sonner';
+import { compressImage, formatFileSize } from '@/lib/imageCompression';
 
 interface UploadZoneProps {
   onUploadComplete: (data: {
@@ -18,18 +19,39 @@ export default function UploadZone({ onUploadComplete }: UploadZoneProps) {
   const [preview, setPreview] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
+  const onDrop = useCallback(async (acceptedFiles: File[]) => {
     if (acceptedFiles.length === 0) return;
 
     const selectedFile = acceptedFiles[0];
-    setFile(selectedFile);
+    const originalSize = formatFileSize(selectedFile.size);
 
-    // Create preview
-    const reader = new FileReader();
-    reader.onload = () => {
-      setPreview(reader.result as string);
-    };
-    reader.readAsDataURL(selectedFile);
+    try {
+      // Compress image if it's an image file
+      const compressedFile = await compressImage(selectedFile);
+      const compressedSize = formatFileSize(compressedFile.size);
+
+      if (compressedFile.size < selectedFile.size) {
+        toast.success(`Image optimized: ${originalSize} → ${compressedSize}`);
+      }
+
+      setFile(compressedFile);
+
+      // Create preview
+      const reader = new FileReader();
+      reader.onload = () => {
+        setPreview(reader.result as string);
+      };
+      reader.readAsDataURL(compressedFile);
+    } catch (error) {
+      console.error('Compression error:', error);
+      // If compression fails, use original file
+      setFile(selectedFile);
+      const reader = new FileReader();
+      reader.onload = () => {
+        setPreview(reader.result as string);
+      };
+      reader.readAsDataURL(selectedFile);
+    }
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -41,6 +63,9 @@ export default function UploadZone({ onUploadComplete }: UploadZoneProps) {
     maxSize: 10 * 1024 * 1024, // 10MB
     multiple: false,
   });
+
+  // Detect if user is on mobile device
+  const isMobile = typeof window !== 'undefined' && /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
   const handleUpload = async () => {
     if (!file) return;
@@ -102,20 +127,49 @@ export default function UploadZone({ onUploadComplete }: UploadZoneProps) {
           <img
             src={preview}
             alt="Receipt preview"
-            className="w-full h-64 object-contain bg-gray-50 rounded-lg"
+            style={{
+              width: '100%',
+              height: isMobile ? '320px' : '384px',
+              objectFit: 'contain',
+              background: 'rgba(255, 255, 255, 0.05)',
+              borderRadius: 'var(--radius-xl)',
+              border: '1px solid rgba(255, 255, 255, 0.2)'
+            }}
           />
           <button
             onClick={handleClear}
-            className="absolute top-2 right-2 p-2 bg-white rounded-full shadow-md hover:bg-gray-100"
+            className="glass"
+            style={{
+              position: 'absolute',
+              top: 'var(--space-2)',
+              right: 'var(--space-2)',
+              padding: 'var(--space-2)',
+              borderRadius: '50%',
+              border: '1px solid rgba(255, 255, 255, 0.2)'
+            }}
           >
-            <X className="w-5 h-5 text-gray-600" />
+            <X className="w-5 h-5 text-white" />
           </button>
         </div>
-        <div className="mt-4 flex gap-3">
-          <Button onClick={handleUpload} loading={uploading} className="flex-1">
+        <div style={{ marginTop: 'var(--space-4)', display: 'flex', gap: 'var(--space-3)' }}>
+          <Button
+            onClick={handleUpload}
+            loading={uploading}
+            className="flex-1"
+            style={{
+              background: 'linear-gradient(135deg, var(--primary-purple), var(--primary-pink))',
+              border: 'none'
+            }}
+          >
             Process Receipt
           </Button>
-          <Button onClick={handleClear} variant="secondary" disabled={uploading}>
+          <Button
+            onClick={handleClear}
+            variant="secondary"
+            disabled={uploading}
+            className="glass"
+            style={{ color: 'white', border: '1px solid rgba(255, 255, 255, 0.2)' }}
+          >
             Cancel
           </Button>
         </div>
@@ -126,31 +180,57 @@ export default function UploadZone({ onUploadComplete }: UploadZoneProps) {
   return (
     <div
       {...getRootProps()}
-      className={`
-        border-2 border-dashed rounded-xl p-12 text-center cursor-pointer
-        transition-all
-        ${isDragActive
-          ? 'border-emerald-600 bg-emerald-50'
-          : 'border-gray-300 bg-gray-50 hover:border-emerald-400 hover:bg-gray-100'
-        }
-      `}
+      style={{
+        border: isDragActive ? '2px dashed rgba(168, 85, 247, 0.6)' : '2px dashed rgba(255, 255, 255, 0.3)',
+        borderRadius: 'var(--radius-2xl)',
+        padding: isMobile ? 'var(--space-8)' : 'var(--space-12)',
+        textAlign: 'center',
+        cursor: 'pointer',
+        transition: 'all 0.3s ease',
+        background: isDragActive ? 'rgba(168, 85, 247, 0.1)' : 'rgba(255, 255, 255, 0.05)',
+      }}
+      className="hover:border-purple-400"
     >
-      <input {...getInputProps()} />
-      <div className="flex flex-col items-center gap-4">
-        <div className="w-16 h-16 bg-emerald-600 rounded-full flex items-center justify-center">
-          <Upload className="w-8 h-8 text-white" />
+      <input {...getInputProps()} capture={isMobile ? "environment" : undefined} />
+      <div className="flex flex-col items-center" style={{ gap: 'var(--space-4)' }}>
+        <div style={{
+          width: isMobile ? '56px' : '64px',
+          height: isMobile ? '56px' : '64px',
+          background: 'linear-gradient(135deg, var(--primary-purple), var(--primary-pink))',
+          borderRadius: '50%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          boxShadow: '0 10px 30px rgba(168, 85, 247, 0.3)'
+        }}>
+          <Upload className={isMobile ? "w-7 h-7" : "w-8 h-8"} color="white" />
         </div>
         <div>
-          <p className="text-xl font-semibold text-gray-900 mb-2">
-            {isDragActive ? 'Drop your receipt here' : 'Drop receipt here or click to upload'}
+          <p style={{
+            fontSize: isMobile ? 'var(--text-lg)' : 'var(--text-xl)',
+            fontWeight: 'var(--font-semibold)',
+            color: 'white',
+            marginBottom: 'var(--space-2)'
+          }}>
+            {isDragActive
+              ? 'Drop your receipt here'
+              : isMobile
+                ? 'Tap to take photo or choose file'
+                : 'Drop receipt here or click to upload'
+            }
           </p>
-          <p className="text-gray-600">
+          <p style={{
+            fontSize: 'var(--text-sm)',
+            color: 'rgba(255, 255, 255, 0.7)'
+          }}>
             Supports JPG, PNG, HEIC, PDF up to 10MB
           </p>
         </div>
-        <Button type="button" variant="secondary">
-          Choose File
-        </Button>
+        {!isMobile && (
+          <Button type="button" variant="secondary" className="glass" style={{ color: 'white' }}>
+            Choose File
+          </Button>
+        )}
       </div>
     </div>
   );
