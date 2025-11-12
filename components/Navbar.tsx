@@ -28,27 +28,27 @@ export default function Navbar({ user }: NavbarProps) {
       ];
 
   return (
-    <nav className="bg-white/80 backdrop-blur-xl border-b border-gray-100 sticky top-0 z-40 shadow-sm">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-        <div className="flex items-center justify-between h-24">
+    <nav className="glass-strong sticky top-0 z-40 border-b border-white/10">
+      <div className="max-w-7xl mx-auto px-8 lg:px-12">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-4 text-xl font-bold text-gray-900">
-            <div className="p-3 bg-emerald-600 rounded-xl shadow-sm">
-              <Receipt className="w-6 h-6 text-white" />
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="p-2.5 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl shadow-lg group-hover:shadow-purple-500/50 transition-all">
+              <Receipt className="w-5 h-5 text-white" />
             </div>
-            <span className="text-xl">ReceiptBox</span>
+            <span className="text-lg font-semibold text-white">ReceiptBox</span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-12">
+          <div className="hidden md:flex items-center gap-10">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className={`text-lg font-medium transition-colors hover:text-emerald-600 ${
+                className={`text-sm font-medium transition-all hover:text-white ${
                   pathname === item.href
-                    ? 'text-emerald-600'
-                    : 'text-gray-700'
+                    ? 'text-white'
+                    : 'text-white/70'
                 }`}
               >
                 {item.name}
@@ -57,12 +57,12 @@ export default function Navbar({ user }: NavbarProps) {
           </div>
 
           {/* Desktop Auth */}
-          <div className="hidden md:flex items-center gap-5">
+          <div className="hidden md:flex items-center gap-4">
             {user ? (
               <>
-                <span className="text-base text-gray-600 font-light">{user.email}</span>
+                <span className="text-sm text-white/70 font-light">{user.email}</span>
                 <form action="/api/auth/logout" method="POST">
-                  <Button variant="secondary" size="small" type="submit">
+                  <Button variant="secondary" size="small" type="submit" className="glass text-white hover:bg-white/20 border-white/20">
                     Log Out
                   </Button>
                 </form>
@@ -70,12 +70,12 @@ export default function Navbar({ user }: NavbarProps) {
             ) : (
               <>
                 <Link href="/login">
-                  <Button variant="ghost" size="small">
+                  <Button variant="ghost" size="small" className="text-white hover:bg-white/10">
                     Log In
                   </Button>
                 </Link>
                 <Link href="/signup">
-                  <Button variant="primary" size="small">
+                  <Button size="small" className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 border-0 shadow-lg text-white">
                     Start Free
                   </Button>
                 </Link>
@@ -86,7 +86,7 @@ export default function Navbar({ user }: NavbarProps) {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-gray-600 hover:text-gray-900"
+            className="md:hidden p-2 text-white/80 hover:text-white"
           >
             {mobileMenuOpen ? (
               <X className="w-6 h-6" />
@@ -99,28 +99,28 @@ export default function Navbar({ user }: NavbarProps) {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-gray-200 bg-white">
-          <div className="px-6 py-6 space-y-4">
+        <div className="md:hidden border-t border-white/10 glass-strong">
+          <div className="px-6 py-6 space-y-3">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className={`block py-3 text-base font-medium ${
+                className={`block py-2.5 text-sm font-medium ${
                   pathname === item.href
-                    ? 'text-emerald-600'
-                    : 'text-gray-600'
+                    ? 'text-white'
+                    : 'text-white/70'
                 }`}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {item.name}
               </Link>
             ))}
-            <div className="pt-6 border-t border-gray-200 space-y-3">
+            <div className="pt-4 border-t border-white/10 space-y-3">
               {user ? (
                 <>
-                  <p className="text-base text-gray-600 font-light">{user.email}</p>
+                  <p className="text-sm text-white/70 font-light">{user.email}</p>
                   <form action="/api/auth/logout" method="POST">
-                    <Button variant="secondary" size="small" className="w-full" type="submit">
+                    <Button variant="secondary" size="small" className="w-full glass text-white" type="submit">
                       Log Out
                     </Button>
                   </form>
@@ -128,12 +128,12 @@ export default function Navbar({ user }: NavbarProps) {
               ) : (
                 <>
                   <Link href="/login" className="block">
-                    <Button variant="ghost" size="small" className="w-full">
+                    <Button variant="ghost" size="small" className="w-full text-white">
                       Log In
                     </Button>
                   </Link>
                   <Link href="/signup" className="block">
-                    <Button variant="primary" size="small" className="w-full">
+                    <Button size="small" className="w-full bg-gradient-to-r from-purple-500 to-pink-500 border-0 text-white">
                       Start Free
                     </Button>
                   </Link>
