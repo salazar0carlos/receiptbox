@@ -45,54 +45,63 @@ export default function SettingsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="inline-block w-8 h-8 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin"></div>
-          <p className="mt-4 text-gray-600">Loading...</p>
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #1e1b4b 0%, #581c87 50%, #1e1b4b 100%)' }}>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ display: 'inline-block', width: '32px', height: '32px', border: '4px solid rgba(168, 85, 247, 0.5)', borderTop: '4px solid var(--primary-purple)', borderRadius: '50%', animation: 'spin 1s linear infinite' }}></div>
+          <p style={{ marginTop: 'var(--space-4)', color: 'rgba(255,255,255,0.8)' }}>Loading...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #1e1b4b 0%, #581c87 50%, #1e1b4b 100%)' }}>
       <Navbar user={user} />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Settings</h1>
+      <div style={{ maxWidth: '1400px', margin: '0 auto', padding: 'var(--space-8) var(--space-6)' }}>
+        <h1 style={{ fontSize: 'var(--text-4xl)', fontWeight: 'var(--font-bold)', color: 'white', marginBottom: 'var(--space-8)' }}>Settings</h1>
 
-        <div className="grid lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-4" style={{ gap: 'var(--space-6)' }}>
           {/* Sidebar */}
-          <div className="lg:col-span-1">
-            <Card variant="bordered" padding="small">
-              <nav className="space-y-1">
+          <div>
+            <div className="glass-strong" style={{ padding: 'var(--space-3)', borderRadius: 'var(--radius-xl)', border: '1px solid rgba(255,255,255,0.2)' }}>
+              <nav style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-1)' }}>
                 {tabs.map((tab) => {
                   const Icon = tab.icon;
                   return (
                     <button
                       key={tab.id}
                       onClick={() => setActiveTab(tab.id)}
-                      className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-colors ${
-                        activeTab === tab.id
-                          ? 'bg-emerald-600 text-white'
-                          : 'text-gray-700 hover:bg-gray-100'
-                      }`}
+                      style={{
+                        width: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 'var(--space-3)',
+                        padding: 'var(--space-3) var(--space-4)',
+                        borderRadius: 'var(--radius-lg)',
+                        textAlign: 'left',
+                        transition: 'all var(--transition-base)',
+                        background: activeTab === tab.id ? 'linear-gradient(135deg, var(--primary-purple), var(--primary-pink))' : 'transparent',
+                        color: 'white',
+                        border: 'none',
+                        cursor: 'pointer'
+                      }}
                     >
                       <Icon className="w-5 h-5" />
-                      <span className="font-medium">{tab.name}</span>
+                      <span style={{ fontWeight: 'var(--font-medium)' }}>{tab.name}</span>
                     </button>
                   );
                 })}
               </nav>
-            </Card>
+            </div>
           </div>
 
           {/* Content */}
-          <div className="lg:col-span-3">
+          <div style={{ gridColumn: 'span 3' }}>
             {activeTab === 'profile' && (
-              <Card variant="shadow" padding="large">
-                <h2 className="text-2xl font-semibold text-gray-900 mb-6">Profile</h2>
-                <div className="space-y-4">
+              <div className="glass-strong" style={{ padding: 'var(--space-8)', borderRadius: 'var(--radius-2xl)', border: '1px solid rgba(255,255,255,0.2)' }}>
+                <h2 style={{ fontSize: 'var(--text-2xl)', fontWeight: 'var(--font-semibold)', color: 'white', marginBottom: 'var(--space-6)' }}>Profile</h2>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
                   <Input
                     label="Email"
                     type="email"
@@ -105,110 +114,166 @@ export default function SettingsPage() {
                     placeholder="Your name"
                   />
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label style={{ display: 'block', fontSize: 'var(--text-sm)', fontWeight: 'var(--font-medium)', color: 'white', marginBottom: 'var(--space-2)' }}>
                       Theme
                     </label>
-                    <select className="w-full min-h-[44px] px-4 py-3 rounded-lg border border-gray-300 bg-white text-gray-900 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-transparent">
+                    <select style={{
+                      width: '100%',
+                      minHeight: '44px',
+                      padding: 'var(--space-3) var(--space-4)',
+                      borderRadius: 'var(--radius-lg)',
+                      border: '1px solid rgba(255,255,255,0.2)',
+                      background: 'rgba(255,255,255,0.05)',
+                      color: 'white',
+                      fontSize: 'var(--text-base)'
+                    }}>
                       <option value="system">System</option>
                       <option value="light">Light</option>
                       <option value="dark">Dark</option>
                     </select>
                   </div>
-                  <Button>Save Changes</Button>
+                  <Button style={{ background: 'linear-gradient(135deg, var(--primary-purple), var(--primary-pink))', border: 'none' }}>Save Changes</Button>
                 </div>
-              </Card>
+              </div>
             )}
 
             {activeTab === 'sheets' && (
-              <Card variant="shadow" padding="large">
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-2xl font-semibold text-gray-900">Google Sheets</h2>
-                  <Button onClick={() => router.push('/sheets/connect')}>
+              <div className="glass-strong" style={{ padding: 'var(--space-8)', borderRadius: 'var(--radius-2xl)', border: '1px solid rgba(255,255,255,0.2)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 'var(--space-6)' }}>
+                  <h2 style={{ fontSize: 'var(--text-2xl)', fontWeight: 'var(--font-semibold)', color: 'white' }}>Google Sheets</h2>
+                  <Button onClick={() => router.push('/sheets/connect')} style={{ background: 'linear-gradient(135deg, var(--primary-purple), var(--primary-pink))', border: 'none' }}>
                     Connect New Sheet
                   </Button>
                 </div>
-                <p className="text-gray-600 mb-6">
+                <p style={{ fontSize: 'var(--text-base)', color: 'rgba(255,255,255,0.8)', marginBottom: 'var(--space-6)' }}>
                   Manage your connected Google Sheets. Each receipt can be saved to any of your connected sheets.
                 </p>
-                <div className="text-center py-12 text-gray-500">
+                <div style={{ textAlign: 'center', padding: 'var(--space-12) 0', color: 'rgba(255,255,255,0.6)' }}>
                   No sheets connected yet. Click "Connect New Sheet" to get started.
                 </div>
-              </Card>
+              </div>
             )}
 
             {activeTab === 'categories' && (
-              <Card variant="shadow" padding="large">
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-2xl font-semibold text-gray-900">Categories</h2>
-                  <Button>Add Category</Button>
+              <div className="glass-strong" style={{ padding: 'var(--space-8)', borderRadius: 'var(--radius-2xl)', border: '1px solid rgba(255,255,255,0.2)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 'var(--space-6)' }}>
+                  <h2 style={{ fontSize: 'var(--text-2xl)', fontWeight: 'var(--font-semibold)', color: 'white' }}>Categories</h2>
+                  <Button style={{ background: 'linear-gradient(135deg, var(--primary-purple), var(--primary-pink))', border: 'none' }}>Add Category</Button>
                 </div>
-                <p className="text-gray-600 mb-6">
+                <p style={{ fontSize: 'var(--text-base)', color: 'rgba(255,255,255,0.8)', marginBottom: 'var(--space-6)' }}>
                   Manage your expense categories and vendor mappings.
                 </p>
-                <div className="text-center py-12 text-gray-500">
+                <div style={{ textAlign: 'center', padding: 'var(--space-12) 0', color: 'rgba(255,255,255,0.6)' }}>
                   Using default categories. Add custom categories for your specific needs.
                 </div>
-              </Card>
+              </div>
             )}
 
             {activeTab === 'notifications' && (
-              <Card variant="shadow" padding="large">
-                <h2 className="text-2xl font-semibold text-gray-900 mb-6">Notifications</h2>
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between py-4 border-b border-gray-200">
+              <div className="glass-strong" style={{ padding: 'var(--space-8)', borderRadius: 'var(--radius-2xl)', border: '1px solid rgba(255,255,255,0.2)' }}>
+                <h2 style={{ fontSize: 'var(--text-2xl)', fontWeight: 'var(--font-semibold)', color: 'white', marginBottom: 'var(--space-6)' }}>Notifications</h2>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--space-4) 0', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
                     <div>
-                      <p className="font-medium text-gray-900">Email notifications</p>
-                      <p className="text-sm text-gray-600">Receive email updates about your receipts</p>
+                      <p style={{ fontWeight: 'var(--font-medium)', color: 'white' }}>Email notifications</p>
+                      <p style={{ fontSize: 'var(--text-sm)', color: 'rgba(255,255,255,0.7)' }}>Receive email updates about your receipts</p>
                     </div>
-                    <label className="relative inline-flex items-center cursor-pointer">
-                      <input type="checkbox" className="sr-only peer" defaultChecked />
-                      <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-emerald-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
+                    <label style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', cursor: 'pointer' }}>
+                      <input type="checkbox" style={{ display: 'none' }} defaultChecked />
+                      <div style={{
+                        width: '44px',
+                        height: '24px',
+                        background: 'linear-gradient(135deg, var(--primary-purple), var(--primary-pink))',
+                        borderRadius: 'var(--radius-full)',
+                        position: 'relative'
+                      }}>
+                        <div style={{
+                          position: 'absolute',
+                          top: '2px',
+                          right: '2px',
+                          width: '20px',
+                          height: '20px',
+                          background: 'white',
+                          borderRadius: '50%',
+                          transition: 'all var(--transition-base)'
+                        }}></div>
+                      </div>
                     </label>
                   </div>
-                  <div className="flex items-center justify-between py-4 border-b border-gray-200">
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--space-4) 0', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
                     <div>
-                      <p className="font-medium text-gray-900">Weekly summary</p>
-                      <p className="text-sm text-gray-600">Get a weekly email with your spending summary</p>
+                      <p style={{ fontWeight: 'var(--font-medium)', color: 'white' }}>Weekly summary</p>
+                      <p style={{ fontSize: 'var(--text-sm)', color: 'rgba(255,255,255,0.7)' }}>Get a weekly email with your spending summary</p>
                     </div>
-                    <label className="relative inline-flex items-center cursor-pointer">
-                      <input type="checkbox" className="sr-only peer" />
-                      <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-emerald-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
+                    <label style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', cursor: 'pointer' }}>
+                      <input type="checkbox" style={{ display: 'none' }} />
+                      <div style={{
+                        width: '44px',
+                        height: '24px',
+                        background: 'rgba(255,255,255,0.2)',
+                        borderRadius: 'var(--radius-full)',
+                        position: 'relative'
+                      }}>
+                        <div style={{
+                          position: 'absolute',
+                          top: '2px',
+                          left: '2px',
+                          width: '20px',
+                          height: '20px',
+                          background: 'white',
+                          borderRadius: '50%',
+                          transition: 'all var(--transition-base)'
+                        }}></div>
+                      </div>
                     </label>
                   </div>
                 </div>
-              </Card>
+              </div>
             )}
 
             {activeTab === 'billing' && (
-              <Card variant="shadow" padding="large">
-                <h2 className="text-2xl font-semibold text-gray-900 mb-6">Billing</h2>
-                <div className="space-y-6">
+              <div className="glass-strong" style={{ padding: 'var(--space-8)', borderRadius: 'var(--radius-2xl)', border: '1px solid rgba(255,255,255,0.2)' }}>
+                <h2 style={{ fontSize: 'var(--text-2xl)', fontWeight: 'var(--font-semibold)', color: 'white', marginBottom: 'var(--space-6)' }}>Billing</h2>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
                   <div>
-                    <p className="text-sm text-gray-600 mb-2">Current Plan</p>
-                    <div className="flex items-center justify-between p-4 bg-emerald-50 border border-emerald-200 rounded-lg">
+                    <p style={{ fontSize: 'var(--text-sm)', color: 'rgba(255,255,255,0.7)', marginBottom: 'var(--space-2)' }}>Current Plan</p>
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      padding: 'var(--space-4)',
+                      background: 'rgba(168, 85, 247, 0.1)',
+                      border: '1px solid rgba(168, 85, 247, 0.3)',
+                      borderRadius: 'var(--radius-lg)'
+                    }}>
                       <div>
-                        <p className="font-semibold text-gray-900">Free Plan</p>
-                        <p className="text-sm text-gray-600">50 receipts per month</p>
+                        <p style={{ fontWeight: 'var(--font-semibold)', color: 'white' }}>Free Plan</p>
+                        <p style={{ fontSize: 'var(--text-sm)', color: 'rgba(255,255,255,0.7)' }}>50 receipts per month</p>
                       </div>
-                      <Button variant="primary" onClick={() => router.push('/pricing')}>
+                      <Button variant="primary" onClick={() => router.push('/pricing')} style={{ background: 'linear-gradient(135deg, var(--primary-purple), var(--primary-pink))', border: 'none' }}>
                         Upgrade
                       </Button>
                     </div>
                   </div>
                   <div>
-                    <p className="text-sm text-gray-600 mb-2">Usage This Month</p>
-                    <div className="p-4 bg-gray-50 rounded-lg">
-                      <div className="flex justify-between mb-2">
-                        <span className="text-gray-700">Receipts</span>
-                        <span className="font-semibold text-gray-900">0 / 50</span>
+                    <p style={{ fontSize: 'var(--text-sm)', color: 'rgba(255,255,255,0.7)', marginBottom: 'var(--space-2)' }}>Usage This Month</p>
+                    <div style={{ padding: 'var(--space-4)', background: 'rgba(255,255,255,0.05)', borderRadius: 'var(--radius-lg)' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--space-2)' }}>
+                        <span style={{ color: 'rgba(255,255,255,0.8)' }}>Receipts</span>
+                        <span style={{ fontWeight: 'var(--font-semibold)', color: 'white' }}>0 / 50</span>
                       </div>
-                      <div className="w-full bg-gray-200 rounded-full h-2">
-                        <div className="bg-emerald-600 h-2 rounded-full" style={{ width: '0%' }}></div>
+                      <div style={{ width: '100%', background: 'rgba(255,255,255,0.1)', borderRadius: 'var(--radius-full)', height: '8px' }}>
+                        <div style={{
+                          background: 'linear-gradient(135deg, var(--primary-purple), var(--primary-pink))',
+                          height: '8px',
+                          borderRadius: 'var(--radius-full)',
+                          width: '0%'
+                        }}></div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </Card>
+              </div>
             )}
           </div>
         </div>

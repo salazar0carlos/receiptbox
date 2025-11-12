@@ -48,9 +48,9 @@ export default function AdminPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #1e1b4b 0%, #581c87 50%, #1e1b4b 100%)' }}>
         <Navbar user={user} />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div style={{ maxWidth: '1400px', margin: '0 auto', padding: 'var(--space-8) var(--space-6)' }}>
           <SkeletonPage />
         </div>
       </div>
@@ -63,111 +63,116 @@ export default function AdminPage() {
     .slice(0, 5);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #1e1b4b 0%, #581c87 50%, #1e1b4b 100%)' }}>
       <Navbar user={user} />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div style={{ maxWidth: '1400px', margin: '0 auto', padding: 'var(--space-8) var(--space-6)' }}>
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Analytics Dashboard</h1>
-          <p className="text-gray-600">Your usage overview and insights</p>
+        <div style={{ marginBottom: 'var(--space-8)' }}>
+          <h1 style={{ fontSize: 'var(--text-4xl)', fontWeight: 'var(--font-bold)', color: 'white', marginBottom: 'var(--space-2)' }}>Analytics Dashboard</h1>
+          <p style={{ fontSize: 'var(--text-lg)', color: 'rgba(255,255,255,0.7)' }}>Your usage overview and insights</p>
         </div>
 
         {/* KPI Cards */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <Card variant="bordered" padding="medium">
-            <div className="flex items-start justify-between">
+        <div className="grid grid-cols-4" style={{ gap: 'var(--space-6)', marginBottom: 'var(--space-8)' }}>
+          <div className="glass-strong" style={{ padding: 'var(--space-6)', borderRadius: 'var(--radius-xl)', border: '1px solid rgba(255,255,255,0.2)' }}>
+            <div style={{ display: 'flex', alignItems: 'start', justifyContent: 'space-between' }}>
               <div>
-                <p className="text-sm text-gray-600 mb-1">Total Receipts</p>
-                <p className="text-3xl font-bold text-gray-900">
+                <p style={{ fontSize: 'var(--text-sm)', color: 'rgba(255,255,255,0.7)', marginBottom: 'var(--space-1)' }}>Total Receipts</p>
+                <p style={{ fontSize: 'var(--text-3xl)', fontWeight: 'var(--font-bold)', color: 'white' }}>
                   {analytics?.receipts?.total || 0}
                 </p>
-                <p className="text-sm text-emerald-600 mt-1">
+                <p className="gradient-text" style={{ fontSize: 'var(--text-sm)', marginTop: 'var(--space-1)' }}>
                   +{analytics?.receipts?.last30Days || 0} this month
                 </p>
               </div>
-              <div className="p-3 bg-emerald-100 rounded-lg">
-                <Receipt className="w-6 h-6 text-emerald-600" />
+              <div style={{ padding: 'var(--space-3)', background: 'linear-gradient(135deg, var(--primary-purple), #9333ea)', borderRadius: 'var(--radius-lg)' }}>
+                <Receipt className="w-6 h-6 text-white" />
               </div>
             </div>
-          </Card>
+          </div>
 
-          <Card variant="bordered" padding="medium">
-            <div className="flex items-start justify-between">
+          <div className="glass-strong" style={{ padding: 'var(--space-6)', borderRadius: 'var(--radius-xl)', border: '1px solid rgba(255,255,255,0.2)' }}>
+            <div style={{ display: 'flex', alignItems: 'start', justifyContent: 'space-between' }}>
               <div>
-                <p className="text-sm text-gray-600 mb-1">Total Spending</p>
-                <p className="text-3xl font-bold text-gray-900">
+                <p style={{ fontSize: 'var(--text-sm)', color: 'rgba(255,255,255,0.7)', marginBottom: 'var(--space-1)' }}>Total Spending</p>
+                <p style={{ fontSize: 'var(--text-3xl)', fontWeight: 'var(--font-bold)', color: 'white' }}>
                   ${analytics?.spending?.total?.toFixed(2) || '0.00'}
                 </p>
-                <p className="text-sm text-gray-500 mt-1">All time</p>
+                <p style={{ fontSize: 'var(--text-sm)', color: 'rgba(255,255,255,0.6)', marginTop: 'var(--space-1)' }}>All time</p>
               </div>
-              <div className="p-3 bg-blue-100 rounded-lg">
-                <DollarSign className="w-6 h-6 text-blue-600" />
+              <div style={{ padding: 'var(--space-3)', background: 'linear-gradient(135deg, var(--primary-pink), #ec4899)', borderRadius: 'var(--radius-lg)' }}>
+                <DollarSign className="w-6 h-6 text-white" />
               </div>
             </div>
-          </Card>
+          </div>
 
-          <Card variant="bordered" padding="medium">
-            <div className="flex items-start justify-between">
+          <div className="glass-strong" style={{ padding: 'var(--space-6)', borderRadius: 'var(--radius-xl)', border: '1px solid rgba(255,255,255,0.2)' }}>
+            <div style={{ display: 'flex', alignItems: 'start', justifyContent: 'space-between' }}>
               <div>
-                <p className="text-sm text-gray-600 mb-1">Sheets Connected</p>
-                <p className="text-3xl font-bold text-gray-900">
+                <p style={{ fontSize: 'var(--text-sm)', color: 'rgba(255,255,255,0.7)', marginBottom: 'var(--space-1)' }}>Sheets Connected</p>
+                <p style={{ fontSize: 'var(--text-3xl)', fontWeight: 'var(--font-bold)', color: 'white' }}>
                   {analytics?.sheets?.connected || 0}
                 </p>
-                <p className="text-sm text-gray-500 mt-1">Active connections</p>
+                <p style={{ fontSize: 'var(--text-sm)', color: 'rgba(255,255,255,0.6)', marginTop: 'var(--space-1)' }}>Active connections</p>
               </div>
-              <div className="p-3 bg-purple-100 rounded-lg">
-                <FileSpreadsheet className="w-6 h-6 text-purple-600" />
+              <div style={{ padding: 'var(--space-3)', background: 'linear-gradient(135deg, var(--primary-cyan), #0891b2)', borderRadius: 'var(--radius-lg)' }}>
+                <FileSpreadsheet className="w-6 h-6 text-white" />
               </div>
             </div>
-          </Card>
+          </div>
 
-          <Card variant="bordered" padding="medium">
-            <div className="flex items-start justify-between">
+          <div className="glass-strong" style={{ padding: 'var(--space-6)', borderRadius: 'var(--radius-xl)', border: '1px solid rgba(255,255,255,0.2)' }}>
+            <div style={{ display: 'flex', alignItems: 'start', justifyContent: 'space-between' }}>
               <div>
-                <p className="text-sm text-gray-600 mb-1">Current Plan</p>
-                <p className="text-3xl font-bold text-gray-900 capitalize">
+                <p style={{ fontSize: 'var(--text-sm)', color: 'rgba(255,255,255,0.7)', marginBottom: 'var(--space-1)' }}>Current Plan</p>
+                <p style={{ fontSize: 'var(--text-3xl)', fontWeight: 'var(--font-bold)', color: 'white', textTransform: 'capitalize' }}>
                   {analytics?.subscription?.plan || 'Free'}
                 </p>
-                <p className="text-sm text-gray-500 mt-1">
+                <p style={{ fontSize: 'var(--text-sm)', color: 'rgba(255,255,255,0.6)', marginTop: 'var(--space-1)' }}>
                   {analytics?.subscription?.status || 'Active'}
                 </p>
               </div>
-              <div className="p-3 bg-orange-100 rounded-lg">
-                <TrendingUp className="w-6 h-6 text-orange-600" />
+              <div style={{ padding: 'var(--space-3)', background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', borderRadius: 'var(--radius-lg)' }}>
+                <TrendingUp className="w-6 h-6 text-white" />
               </div>
             </div>
-          </Card>
+          </div>
         </div>
 
         {/* Charts */}
-        <div className="grid lg:grid-cols-2 gap-6">
+        <div className="grid grid-cols-2" style={{ gap: 'var(--space-6)' }}>
           {/* Top Categories */}
-          <Card variant="shadow" padding="large">
-            <h2 className="text-xl font-semibold text-gray-900 mb-6">
+          <div className="glass-strong" style={{ padding: 'var(--space-8)', borderRadius: 'var(--radius-2xl)', border: '1px solid rgba(255,255,255,0.2)' }}>
+            <h2 style={{ fontSize: 'var(--text-xl)', fontWeight: 'var(--font-semibold)', color: 'white', marginBottom: 'var(--space-6)' }}>
               Top Spending Categories
             </h2>
             {topCategories.length > 0 ? (
-              <div className="space-y-4">
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
                 {topCategories.map(([category, amount]: any) => {
                   const percentage = (amount / analytics.spending.total) * 100;
                   return (
                     <div key={category}>
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm font-medium text-gray-700">
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 'var(--space-2)' }}>
+                        <span style={{ fontSize: 'var(--text-sm)', fontWeight: 'var(--font-medium)', color: 'rgba(255,255,255,0.9)' }}>
                           {category}
                         </span>
-                        <span className="text-sm font-semibold text-gray-900">
+                        <span style={{ fontSize: 'var(--text-sm)', fontWeight: 'var(--font-semibold)', color: 'white' }}>
                           ${amount.toFixed(2)}
                         </span>
                       </div>
-                      <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div style={{ width: '100%', background: 'rgba(255,255,255,0.1)', borderRadius: 'var(--radius-full)', height: '8px' }}>
                         <div
-                          className="bg-emerald-600 h-2 rounded-full transition-all"
-                          style={{ width: `${percentage}%` }}
+                          style={{
+                            background: 'linear-gradient(135deg, var(--primary-purple), var(--primary-pink))',
+                            height: '8px',
+                            borderRadius: 'var(--radius-full)',
+                            transition: 'all var(--transition-base)',
+                            width: `${percentage}%`
+                          }}
                         />
                       </div>
-                      <p className="text-xs text-gray-500 mt-1">
+                      <p style={{ fontSize: 'var(--text-xs)', color: 'rgba(255,255,255,0.6)', marginTop: 'var(--space-1)' }}>
                         {percentage.toFixed(1)}% of total
                       </p>
                     </div>
@@ -175,88 +180,115 @@ export default function AdminPage() {
                 })}
               </div>
             ) : (
-              <div className="text-center py-12">
-                <p className="text-gray-500">No spending data yet</p>
-                <p className="text-sm text-gray-400 mt-2">
+              <div style={{ textAlign: 'center', padding: 'var(--space-12) 0' }}>
+                <p style={{ color: 'rgba(255,255,255,0.6)' }}>No spending data yet</p>
+                <p style={{ fontSize: 'var(--text-sm)', color: 'rgba(255,255,255,0.5)', marginTop: 'var(--space-2)' }}>
                   Upload receipts to see analytics
                 </p>
               </div>
             )}
-          </Card>
+          </div>
 
           {/* Recent Activity */}
-          <Card variant="shadow" padding="large">
-            <h2 className="text-xl font-semibold text-gray-900 mb-6">
+          <div className="glass-strong" style={{ padding: 'var(--space-8)', borderRadius: 'var(--radius-2xl)', border: '1px solid rgba(255,255,255,0.2)' }}>
+            <h2 style={{ fontSize: 'var(--text-xl)', fontWeight: 'var(--font-semibold)', color: 'white', marginBottom: 'var(--space-6)' }}>
               Usage Statistics
             </h2>
-            <div className="space-y-6">
-              <div className="flex items-center justify-between p-4 bg-emerald-50 rounded-lg">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--space-4)', background: 'rgba(168, 85, 247, 0.1)', borderRadius: 'var(--radius-lg)' }}>
                 <div>
-                  <p className="text-sm text-gray-600">Receipts (Last 30 Days)</p>
-                  <p className="text-2xl font-bold text-gray-900">
+                  <p style={{ fontSize: 'var(--text-sm)', color: 'rgba(255,255,255,0.7)' }}>Receipts (Last 30 Days)</p>
+                  <p style={{ fontSize: 'var(--text-2xl)', fontWeight: 'var(--font-bold)', color: 'white' }}>
                     {analytics?.receipts?.last30Days || 0}
                   </p>
                 </div>
-                <Receipt className="w-10 h-10 text-emerald-600" />
+                <Receipt className="w-10 h-10" style={{ color: 'var(--primary-purple)' }} />
               </div>
 
-              <div className="flex items-center justify-between p-4 bg-blue-50 rounded-lg">
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--space-4)', background: 'rgba(236, 72, 153, 0.1)', borderRadius: 'var(--radius-lg)' }}>
                 <div>
-                  <p className="text-sm text-gray-600">Average per Receipt</p>
-                  <p className="text-2xl font-bold text-gray-900">
+                  <p style={{ fontSize: 'var(--text-sm)', color: 'rgba(255,255,255,0.7)' }}>Average per Receipt</p>
+                  <p style={{ fontSize: 'var(--text-2xl)', fontWeight: 'var(--font-bold)', color: 'white' }}>
                     ${(analytics?.spending?.total / (analytics?.receipts?.total || 1)).toFixed(2)}
                   </p>
                 </div>
-                <DollarSign className="w-10 h-10 text-blue-600" />
+                <DollarSign className="w-10 h-10" style={{ color: 'var(--primary-pink)' }} />
               </div>
 
-              <div className="flex items-center justify-between p-4 bg-purple-50 rounded-lg">
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: 'var(--space-4)', background: 'rgba(6, 182, 212, 0.1)', borderRadius: 'var(--radius-lg)' }}>
                 <div>
-                  <p className="text-sm text-gray-600">Categories Used</p>
-                  <p className="text-2xl font-bold text-gray-900">
+                  <p style={{ fontSize: 'var(--text-sm)', color: 'rgba(255,255,255,0.7)' }}>Categories Used</p>
+                  <p style={{ fontSize: 'var(--text-2xl)', fontWeight: 'var(--font-bold)', color: 'white' }}>
                     {Object.keys(categoryData).length}
                   </p>
                 </div>
-                <TrendingUp className="w-10 h-10 text-purple-600" />
+                <TrendingUp className="w-10 h-10" style={{ color: 'var(--primary-cyan)' }} />
               </div>
             </div>
-          </Card>
+          </div>
         </div>
 
         {/* Quick Actions */}
-        <Card variant="bordered" padding="large" className="mt-6">
-          <h2 className="text-xl font-semibold text-gray-900 mb-4">
+        <div className="glass-strong" style={{ padding: 'var(--space-8)', borderRadius: 'var(--radius-2xl)', border: '1px solid rgba(255,255,255,0.2)', marginTop: 'var(--space-6)' }}>
+          <h2 style={{ fontSize: 'var(--text-xl)', fontWeight: 'var(--font-semibold)', color: 'white', marginBottom: 'var(--space-4)' }}>
             Quick Actions
           </h2>
-          <div className="grid sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-3" style={{ gap: 'var(--space-4)' }}>
             <button
               onClick={() => router.push('/dashboard')}
-              className="p-4 text-left border border-gray-200 rounded-lg hover:border-emerald-600 hover:bg-emerald-50 transition-all"
+              style={{
+                padding: 'var(--space-4)',
+                textAlign: 'left',
+                border: '1px solid rgba(255,255,255,0.2)',
+                borderRadius: 'var(--radius-lg)',
+                background: 'transparent',
+                cursor: 'pointer',
+                transition: 'all var(--transition-base)',
+                color: 'white'
+              }}
             >
-              <Receipt className="w-8 h-8 text-emerald-600 mb-2" />
-              <h3 className="font-semibold text-gray-900 mb-1">Upload Receipt</h3>
-              <p className="text-sm text-gray-600">Add a new receipt</p>
+              <Receipt className="w-8 h-8" style={{ color: 'var(--primary-purple)', marginBottom: 'var(--space-2)' }} />
+              <h3 style={{ fontWeight: 'var(--font-semibold)', color: 'white', marginBottom: 'var(--space-1)' }}>Upload Receipt</h3>
+              <p style={{ fontSize: 'var(--text-sm)', color: 'rgba(255,255,255,0.7)' }}>Add a new receipt</p>
             </button>
 
             <button
               onClick={() => router.push('/library')}
-              className="p-4 text-left border border-gray-200 rounded-lg hover:border-emerald-600 hover:bg-emerald-50 transition-all"
+              style={{
+                padding: 'var(--space-4)',
+                textAlign: 'left',
+                border: '1px solid rgba(255,255,255,0.2)',
+                borderRadius: 'var(--radius-lg)',
+                background: 'transparent',
+                cursor: 'pointer',
+                transition: 'all var(--transition-base)',
+                color: 'white'
+              }}
             >
-              <FileSpreadsheet className="w-8 h-8 text-emerald-600 mb-2" />
-              <h3 className="font-semibold text-gray-900 mb-1">View Library</h3>
-              <p className="text-sm text-gray-600">Browse all receipts</p>
+              <FileSpreadsheet className="w-8 h-8" style={{ color: 'var(--primary-pink)', marginBottom: 'var(--space-2)' }} />
+              <h3 style={{ fontWeight: 'var(--font-semibold)', color: 'white', marginBottom: 'var(--space-1)' }}>View Library</h3>
+              <p style={{ fontSize: 'var(--text-sm)', color: 'rgba(255,255,255,0.7)' }}>Browse all receipts</p>
             </button>
 
             <button
               onClick={() => router.push('/settings')}
-              className="p-4 text-left border border-gray-200 rounded-lg hover:border-emerald-600 hover:bg-emerald-50 transition-all"
+              style={{
+                padding: 'var(--space-4)',
+                textAlign: 'left',
+                border: '1px solid rgba(255,255,255,0.2)',
+                borderRadius: 'var(--radius-lg)',
+                background: 'transparent',
+                cursor: 'pointer',
+                transition: 'all var(--transition-base)',
+                color: 'white'
+              }}
             >
-              <Users className="w-8 h-8 text-emerald-600 mb-2" />
-              <h3 className="font-semibold text-gray-900 mb-1">Settings</h3>
-              <p className="text-sm text-gray-600">Manage your account</p>
+              <Users className="w-8 h-8" style={{ color: 'var(--primary-cyan)', marginBottom: 'var(--space-2)' }} />
+              <h3 style={{ fontWeight: 'var(--font-semibold)', color: 'white', marginBottom: 'var(--space-1)' }}>Settings</h3>
+              <p style={{ fontSize: 'var(--text-sm)', color: 'rgba(255,255,255,0.7)' }}>Manage your account</p>
             </button>
           </div>
-        </Card>
+        </div>
       </div>
     </div>
   );

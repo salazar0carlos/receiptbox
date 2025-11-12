@@ -47,27 +47,73 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-      <div className="w-full max-w-md">
+    <div style={{
+      minHeight: '100vh',
+      background: 'linear-gradient(135deg, #1e1b4b 0%, #581c87 50%, #1e1b4b 100%)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: 'var(--space-6)'
+    }}>
+      <div style={{ width: '100%', maxWidth: '480px' }}>
         {/* Logo */}
-        <Link href="/" className="flex items-center justify-center gap-2 mb-8">
-          <div className="p-3 bg-emerald-600 rounded-xl">
-            <Receipt className="w-8 h-8 text-white" />
+        <Link href="/" style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 'var(--space-3)',
+          marginBottom: 'var(--space-8)',
+          textDecoration: 'none'
+        }}>
+          <div style={{
+            padding: 'var(--space-3)',
+            background: 'linear-gradient(135deg, var(--primary-purple), var(--primary-pink))',
+            borderRadius: 'var(--radius-xl)'
+          }}>
+            <Receipt size={32} color="white" />
           </div>
-          <span className="text-2xl font-bold text-gray-900">ReceiptBox</span>
+          <span style={{
+            fontSize: 'var(--text-2xl)',
+            fontWeight: 'var(--font-bold)',
+            color: 'white'
+          }}>
+            ReceiptBox
+          </span>
         </Link>
 
         {/* Card */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Start free</h1>
-            <p className="text-gray-600">Track receipts. Zero manual entry.</p>
+        <div className="glass-strong" style={{
+          borderRadius: 'var(--radius-2xl)',
+          padding: 'var(--space-8)',
+          border: '1px solid rgba(255,255,255,0.2)'
+        }}>
+          <div style={{ textAlign: 'center', marginBottom: 'var(--space-8)' }}>
+            <h1 style={{
+              fontSize: 'var(--text-4xl)',
+              fontWeight: 'var(--font-bold)',
+              color: 'white',
+              marginBottom: 'var(--space-2)'
+            }}>
+              Start free
+            </h1>
+            <p style={{
+              fontSize: 'var(--text-base)',
+              color: 'rgba(255,255,255,0.7)'
+            }}>
+              Track receipts. Zero manual entry.
+            </p>
           </div>
 
           {/* Google Signup */}
           <Button
             variant="secondary"
-            className="w-full mb-6"
+            className="glass"
+            style={{
+              width: '100%',
+              marginBottom: 'var(--space-6)',
+              color: 'white',
+              border: '1px solid rgba(255,255,255,0.2)'
+            }}
             onClick={handleGoogleSignup}
           >
             <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
@@ -92,17 +138,40 @@ export default function SignupPage() {
           </Button>
 
           {/* Divider */}
-          <div className="relative mb-6">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-200" />
+          <div style={{ position: 'relative', marginBottom: 'var(--space-6)' }}>
+            <div style={{
+              position: 'absolute',
+              inset: 0,
+              display: 'flex',
+              alignItems: 'center'
+            }}>
+              <div style={{
+                width: '100%',
+                borderTop: '1px solid rgba(255,255,255,0.2)'
+              }} />
             </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-white text-gray-500">OR</span>
+            <div style={{
+              position: 'relative',
+              display: 'flex',
+              justifyContent: 'center',
+              fontSize: 'var(--text-sm)'
+            }}>
+              <span style={{
+                padding: '0 var(--space-4)',
+                background: 'rgba(255,255,255,0.12)',
+                color: 'rgba(255,255,255,0.6)'
+              }}>
+                OR
+              </span>
             </div>
           </div>
 
           {/* Email/Password Form */}
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 'var(--space-4)'
+          }}>
             <Input
               type="text"
               label="Name"
@@ -111,6 +180,11 @@ export default function SignupPage() {
               onChange={(e) => setName(e.target.value)}
               icon={<User className="w-5 h-5" />}
               required
+              style={{
+                background: 'rgba(255,255,255,0.1)',
+                border: '1px solid rgba(255,255,255,0.2)',
+                color: 'white'
+              }}
             />
 
             <Input
@@ -121,6 +195,11 @@ export default function SignupPage() {
               onChange={(e) => setEmail(e.target.value)}
               icon={<Mail className="w-5 h-5" />}
               required
+              style={{
+                background: 'rgba(255,255,255,0.1)',
+                border: '1px solid rgba(255,255,255,0.2)',
+                color: 'white'
+              }}
             />
 
             <Input
@@ -132,24 +211,52 @@ export default function SignupPage() {
               icon={<Lock className="w-5 h-5" />}
               helperText="Minimum 8 characters"
               required
+              style={{
+                background: 'rgba(255,255,255,0.1)',
+                border: '1px solid rgba(255,255,255,0.2)',
+                color: 'white'
+              }}
             />
 
-            <Button type="submit" className="w-full" loading={loading}>
+            <Button
+              type="submit"
+              loading={loading}
+              style={{
+                width: '100%',
+                background: 'linear-gradient(135deg, var(--primary-purple), var(--primary-pink))',
+                border: 'none',
+                marginTop: 'var(--space-2)'
+              }}
+            >
               Create Account
             </Button>
           </form>
 
           {/* Login Link */}
-          <p className="text-center text-sm text-gray-600 mt-6">
+          <p style={{
+            textAlign: 'center',
+            fontSize: 'var(--text-sm)',
+            color: 'rgba(255,255,255,0.7)',
+            marginTop: 'var(--space-6)'
+          }}>
             Already have an account?{' '}
-            <Link href="/login" className="text-emerald-600 font-medium hover:text-emerald-700">
+            <Link href="/login" style={{
+              color: 'white',
+              fontWeight: 'var(--font-semibold)',
+              textDecoration: 'none'
+            }}>
               Log in
             </Link>
           </p>
         </div>
 
         {/* Footer */}
-        <p className="text-center text-sm text-gray-500 mt-8">
+        <p style={{
+          textAlign: 'center',
+          fontSize: 'var(--text-sm)',
+          color: 'rgba(255,255,255,0.6)',
+          marginTop: 'var(--space-8)'
+        }}>
           Free plan includes 50 receipts/month. No credit card required.
         </p>
       </div>

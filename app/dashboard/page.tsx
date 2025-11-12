@@ -99,136 +99,187 @@ export default function DashboardPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="inline-block w-8 h-8 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin"></div>
-          <p className="mt-4 text-gray-600">Loading...</p>
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #1e1b4b 0%, #581c87 50%, #1e1b4b 100%)' }}>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ display: 'inline-block', width: '32px', height: '32px', border: '4px solid rgba(168, 85, 247, 0.5)', borderTop: '4px solid var(--primary-purple)', borderRadius: '50%', animation: 'spin 1s linear infinite' }}></div>
+          <p style={{ marginTop: 'var(--space-4)', color: 'rgba(255,255,255,0.8)' }}>Loading...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #1e1b4b 0%, #581c87 50%, #1e1b4b 100%)' }}>
       <Navbar user={user} />
 
-      <div className="max-w-6xl mx-auto px-6 py-32">
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: 'var(--space-6) var(--space-6) var(--space-12)' }}>
         {/* Header */}
-        <div className="mb-32 text-center">
-          <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-gray-900 mb-8 tracking-[-0.03em]">Dashboard</h1>
-          <p className="text-2xl md:text-3xl text-gray-600 font-light">Upload receipts and track your spending</p>
+        <div style={{ marginBottom: 'var(--space-12)', textAlign: 'center', paddingTop: 'var(--space-16)' }}>
+          <h1 style={{ fontSize: 'var(--text-5xl)', fontWeight: 'var(--font-bold)', color: 'white', marginBottom: 'var(--space-4)' }}>
+            Dashboard
+          </h1>
+          <p style={{ fontSize: 'var(--text-xl)', color: 'rgba(255,255,255,0.8)' }}>
+            Upload receipts and track your spending
+          </p>
         </div>
 
         {/* Sheet Connection Status */}
         {sheetConnections.length === 0 && (
-          <Card variant="bordered" padding="large" className="mb-32 bg-amber-50/50 border-amber-200">
-            <div className="flex flex-col md:flex-row items-start gap-12">
-              <div className="p-5 bg-amber-600 rounded-3xl shadow-md">
-                <FileSpreadsheet className="w-10 h-10 text-white" />
+          <div className="glass-strong" style={{ padding: 'var(--space-8)', borderRadius: 'var(--radius-2xl)', border: '1px solid rgba(255,255,255,0.2)', marginBottom: 'var(--space-12)' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-6)' }}>
+              <div style={{
+                width: '56px',
+                height: '56px',
+                background: 'linear-gradient(135deg, var(--primary-purple), var(--primary-pink))',
+                borderRadius: 'var(--radius-2xl)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                boxShadow: '0 10px 30px rgba(168, 85, 247, 0.3)'
+              }}>
+                <FileSpreadsheet className="w-8 h-8 text-white" />
               </div>
-              <div className="flex-1">
-                <h3 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-6 tracking-tight">
+              <div>
+                <h3 style={{ fontSize: 'var(--text-2xl)', fontWeight: 'var(--font-semibold)', color: 'white', marginBottom: 'var(--space-3)' }}>
                   Connect Google Sheets
                 </h3>
-                <p className="text-xl md:text-2xl text-gray-600 mb-10 leading-relaxed font-light">
+                <p style={{ fontSize: 'var(--text-lg)', color: 'rgba(255,255,255,0.8)', marginBottom: 'var(--space-6)', lineHeight: 'var(--leading-relaxed)' }}>
                   Connect a Google Sheet to automatically sync your receipt data. Choose from pre-built templates or connect an existing sheet.
                 </p>
                 <Button
                   variant="primary"
                   size="large"
                   onClick={() => router.push('/sheets/connect')}
-                  className="text-xl px-12 py-5"
+                  style={{
+                    background: 'linear-gradient(135deg, var(--primary-purple), var(--primary-pink))',
+                    border: 'none'
+                  }}
                 >
                   <Plus className="w-6 h-6 mr-2" />
                   Connect Sheet
                 </Button>
               </div>
             </div>
-          </Card>
+          </div>
         )}
 
         {/* Main Content */}
         {step === 'upload' && (
-          <Card variant="shadow" padding="large">
-            <h2 className="text-4xl md:text-5xl font-semibold text-gray-900 mb-16 text-center tracking-tight">
+          <div className="glass-strong" style={{ padding: 'var(--space-8)', borderRadius: 'var(--radius-2xl)', border: '1px solid rgba(255,255,255,0.2)' }}>
+            <h2 style={{ fontSize: 'var(--text-3xl)', fontWeight: 'var(--font-semibold)', color: 'white', marginBottom: 'var(--space-8)', textAlign: 'center' }}>
               Upload Receipt
             </h2>
             <UploadZone onUploadComplete={handleUploadComplete} />
-          </Card>
+          </div>
         )}
 
         {step === 'review' && receiptData && (
-          <Card variant="shadow" padding="large">
+          <div className="glass-strong" style={{ padding: 'var(--space-8)', borderRadius: 'var(--radius-2xl)', border: '1px solid rgba(255,255,255,0.2)' }}>
             <ReceiptReview
               ocrData={receiptData.ocrData}
               imageUrl={receiptData.imageUrl}
               onSave={handleSaveReceipt}
               onCancel={handleStartNew}
             />
-          </Card>
+          </div>
         )}
 
         {step === 'success' && (
-          <Card variant="shadow" padding="large" className="text-center">
-            <div className="w-20 h-20 bg-emerald-600 rounded-full flex items-center justify-center mx-auto mb-8">
+          <div className="glass-strong" style={{ padding: 'var(--space-8)', borderRadius: 'var(--radius-2xl)', border: '1px solid rgba(255,255,255,0.2)', textAlign: 'center' }}>
+            <div style={{
+              width: '80px',
+              height: '80px',
+              background: 'linear-gradient(135deg, var(--primary-purple), var(--primary-pink))',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '0 auto var(--space-6)',
+              boxShadow: '0 10px 30px rgba(168, 85, 247, 0.3)'
+            }}>
               <ReceiptIcon className="w-10 h-10 text-white" />
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
+            <h2 style={{ fontSize: 'var(--text-4xl)', fontWeight: 'var(--font-bold)', color: 'white', marginBottom: 'var(--space-4)' }}>
               Receipt Saved!
             </h2>
-            <p className="text-xl md:text-2xl text-gray-600 mb-12 font-light">
+            <p style={{ fontSize: 'var(--text-xl)', color: 'rgba(255,255,255,0.8)', marginBottom: 'var(--space-8)' }}>
               Your receipt has been saved to your library.
             </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Button size="large" onClick={handleStartNew} className="text-xl px-10 py-5">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)', alignItems: 'center' }}>
+              <Button
+                size="large"
+                onClick={handleStartNew}
+                style={{
+                  background: 'linear-gradient(135deg, var(--primary-purple), var(--primary-pink))',
+                  border: 'none'
+                }}
+              >
                 <Plus className="w-6 h-6 mr-2" />
                 Upload Another
               </Button>
-              <Button size="large" variant="secondary" onClick={() => router.push('/library')} className="text-xl px-10 py-5">
+              <Button
+                size="large"
+                variant="secondary"
+                onClick={() => router.push('/library')}
+                className="glass"
+                style={{ color: 'white' }}
+              >
                 View Library
               </Button>
             </div>
-          </Card>
+          </div>
         )}
 
         {/* Quick Stats */}
         {step === 'upload' && (
-          <div className="grid md:grid-cols-3 gap-8 mt-16">
-            <Card variant="bordered" padding="medium">
-              <div className="flex items-center gap-6">
-                <div className="p-4 bg-emerald-100 rounded-2xl">
-                  <ReceiptIcon className="w-8 h-8 text-emerald-600" />
+          <div className="grid grid-cols-3" style={{ gap: 'var(--space-6)', marginTop: 'var(--space-8)' }}>
+            <div className="glass-strong" style={{ padding: 'var(--space-6)', borderRadius: 'var(--radius-xl)', border: '1px solid rgba(255,255,255,0.2)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)' }}>
+                <div style={{
+                  padding: 'var(--space-3)',
+                  background: 'linear-gradient(135deg, var(--primary-purple), #9333ea)',
+                  borderRadius: 'var(--radius-xl)'
+                }}>
+                  <ReceiptIcon className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <p className="text-base text-gray-600 font-light mb-1">This Month</p>
-                  <p className="text-3xl font-bold text-gray-900">0</p>
+                  <p style={{ fontSize: 'var(--text-sm)', color: 'rgba(255,255,255,0.7)', marginBottom: 'var(--space-1)' }}>This Month</p>
+                  <p style={{ fontSize: 'var(--text-2xl)', fontWeight: 'var(--font-bold)', color: 'white' }}>0</p>
                 </div>
               </div>
-            </Card>
+            </div>
 
-            <Card variant="bordered" padding="medium">
-              <div className="flex items-center gap-6">
-                <div className="p-4 bg-emerald-100 rounded-2xl">
-                  <FileSpreadsheet className="w-8 h-8 text-emerald-600" />
+            <div className="glass-strong" style={{ padding: 'var(--space-6)', borderRadius: 'var(--radius-xl)', border: '1px solid rgba(255,255,255,0.2)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)' }}>
+                <div style={{
+                  padding: 'var(--space-3)',
+                  background: 'linear-gradient(135deg, var(--primary-pink), #ec4899)',
+                  borderRadius: 'var(--radius-xl)'
+                }}>
+                  <FileSpreadsheet className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <p className="text-base text-gray-600 font-light mb-1">Sheets Connected</p>
-                  <p className="text-3xl font-bold text-gray-900">{sheetConnections.length}</p>
+                  <p style={{ fontSize: 'var(--text-sm)', color: 'rgba(255,255,255,0.7)', marginBottom: 'var(--space-1)' }}>Sheets Connected</p>
+                  <p style={{ fontSize: 'var(--text-2xl)', fontWeight: 'var(--font-bold)', color: 'white' }}>{sheetConnections.length}</p>
                 </div>
               </div>
-            </Card>
+            </div>
 
-            <Card variant="bordered" padding="medium">
-              <div className="flex items-center gap-6">
-                <div className="p-4 bg-emerald-100 rounded-2xl">
-                  <ReceiptIcon className="w-8 h-8 text-emerald-600" />
+            <div className="glass-strong" style={{ padding: 'var(--space-6)', borderRadius: 'var(--radius-xl)', border: '1px solid rgba(255,255,255,0.2)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)' }}>
+                <div style={{
+                  padding: 'var(--space-3)',
+                  background: 'linear-gradient(135deg, var(--primary-cyan), #0891b2)',
+                  borderRadius: 'var(--radius-xl)'
+                }}>
+                  <ReceiptIcon className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <p className="text-base text-gray-600 font-light mb-1">Total Receipts</p>
-                  <p className="text-3xl font-bold text-gray-900">0</p>
+                  <p style={{ fontSize: 'var(--text-sm)', color: 'rgba(255,255,255,0.7)', marginBottom: 'var(--space-1)' }}>Total Receipts</p>
+                  <p style={{ fontSize: 'var(--text-2xl)', fontWeight: 'var(--font-bold)', color: 'white' }}>0</p>
                 </div>
               </div>
-            </Card>
+            </div>
           </div>
         )}
       </div>

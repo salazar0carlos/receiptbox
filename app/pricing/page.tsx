@@ -76,126 +76,151 @@ export default function PricingPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #1e1b4b 0%, #581c87 50%, #1e1b4b 100%)' }}>
       <Navbar />
 
       {/* Hero */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 text-center">
-        <h1 className="text-5xl font-bold text-gray-900 mb-4">
+      <section style={{ maxWidth: '1400px', margin: '0 auto', padding: 'var(--space-16) var(--space-6) var(--space-12)', textAlign: 'center' }}>
+        <h1 style={{ fontSize: 'var(--text-5xl)', fontWeight: 'var(--font-bold)', color: 'white', marginBottom: 'var(--space-4)' }}>
           Simple, honest pricing
         </h1>
-        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+        <p style={{ fontSize: 'var(--text-xl)', color: 'rgba(255,255,255,0.8)', maxWidth: '700px', margin: '0 auto' }}>
           Start free. Upgrade when you're ready. Cancel anytime. No tricks.
         </p>
       </section>
 
       {/* Pricing Cards */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
-        <div className="grid md:grid-cols-4 gap-6">
+      <section style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 var(--space-6) var(--space-16)' }}>
+        <div className="grid grid-cols-4" style={{ gap: 'var(--space-6)' }}>
           {plans.map((plan) => (
-            <Card
+            <div
               key={plan.name}
-              variant={plan.popular ? 'shadow' : 'bordered'}
-              padding="large"
-              className={`relative ${
-                plan.popular ? 'border-2 border-emerald-600' : ''
-              }`}
+              className="glass-strong"
+              style={{
+                padding: 'var(--space-8)',
+                borderRadius: 'var(--radius-2xl)',
+                border: plan.popular ? '2px solid rgba(168, 85, 247, 0.5)' : '1px solid rgba(255,255,255,0.2)',
+                display: 'flex',
+                flexDirection: 'column',
+                position: 'relative',
+                transform: plan.popular ? 'scale(1.05)' : 'none',
+                boxShadow: plan.popular ? '0 20px 60px rgba(168, 85, 247, 0.2)' : 'none'
+              }}
             >
               {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-emerald-600 text-white px-4 py-1 rounded-full text-sm font-medium flex items-center gap-1">
+                <div style={{
+                  position: 'absolute',
+                  top: '-12px',
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  background: 'linear-gradient(135deg, var(--primary-purple), var(--primary-pink))',
+                  padding: 'var(--space-2) var(--space-6)',
+                  borderRadius: 'var(--radius-full)',
+                  fontSize: 'var(--text-sm)',
+                  fontWeight: 'var(--font-semibold)',
+                  color: 'white',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 'var(--space-1)'
+                }}>
                   <Zap className="w-4 h-4" />
                   Popular
                 </div>
               )}
 
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              <h3 style={{ fontSize: 'var(--text-xl)', fontWeight: 'var(--font-semibold)', color: 'white', marginBottom: 'var(--space-2)' }}>
                 {plan.name}
               </h3>
-              <div className="mb-4">
-                <span className="text-4xl font-bold text-gray-900">
+              <div style={{ marginBottom: 'var(--space-4)' }}>
+                <span style={{ fontSize: 'var(--text-4xl)', fontWeight: 'var(--font-bold)', color: 'white' }}>
                   ${plan.price}
                 </span>
-                <span className="text-gray-600">/month</span>
+                <span style={{ fontSize: 'var(--text-base)', color: 'rgba(255,255,255,0.7)' }}>/month</span>
               </div>
-              <p className="text-gray-600 mb-6">{plan.description}</p>
+              <p style={{ fontSize: 'var(--text-base)', color: 'rgba(255,255,255,0.8)', marginBottom: 'var(--space-6)' }}>{plan.description}</p>
 
-              <ul className="space-y-3 mb-8">
-                {plan.features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-2">
-                    <Check className="w-5 h-5 text-emerald-600 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-600">{feature}</span>
+              <ul style={{ listStyle: 'none', padding: 0, marginBottom: 'var(--space-8)', flex: 1 }}>
+                {plan.features.map((feature, i) => (
+                  <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: 'var(--space-2)', marginBottom: 'var(--space-3)' }}>
+                    <Check className="w-5 h-5" style={{ color: plan.popular ? 'var(--primary-pink)' : 'var(--primary-cyan)', flexShrink: 0, marginTop: '2px' }} />
+                    <span style={{ fontSize: 'var(--text-sm)', color: 'rgba(255,255,255,0.8)' }}>{feature}</span>
                   </li>
                 ))}
               </ul>
 
-              <Link href={plan.href} className="block">
+              <Link href={plan.href}>
                 <Button
                   variant={plan.popular ? 'primary' : 'secondary'}
-                  className="w-full"
+                  style={plan.popular ? {
+                    width: '100%',
+                    background: 'linear-gradient(135deg, var(--primary-purple), var(--primary-pink))',
+                    border: 'none'
+                  } : { width: '100%', color: 'white' }}
+                  className={!plan.popular ? 'glass' : ''}
                 >
                   {plan.cta}
                 </Button>
               </Link>
-            </Card>
+            </div>
           ))}
         </div>
 
-        <div className="text-center mt-12">
-          <p className="text-gray-600">
+        <div style={{ textAlign: 'center', marginTop: 'var(--space-12)' }}>
+          <p style={{ fontSize: 'var(--text-base)', color: 'rgba(255,255,255,0.7)' }}>
             All plans include a 14-day money-back guarantee. No questions asked.
           </p>
         </div>
       </section>
 
       {/* FAQ */}
-      <section className="bg-gray-50 py-20">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">
+      <section style={{ padding: 'var(--space-16) var(--space-6)', background: 'rgba(255,255,255,0.03)' }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto' }}>
+          <h2 style={{ fontSize: 'var(--text-3xl)', fontWeight: 'var(--font-bold)', color: 'white', marginBottom: 'var(--space-12)', textAlign: 'center' }}>
             Frequently Asked Questions
           </h2>
 
-          <div className="space-y-8">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-8)' }}>
             <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              <h3 style={{ fontSize: 'var(--text-xl)', fontWeight: 'var(--font-semibold)', color: 'white', marginBottom: 'var(--space-2)' }}>
                 Can I change plans anytime?
               </h3>
-              <p className="text-gray-600">
+              <p style={{ fontSize: 'var(--text-base)', color: 'rgba(255,255,255,0.8)' }}>
                 Yes. Upgrade or downgrade whenever you want. Your billing adjusts automatically.
               </p>
             </div>
 
             <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              <h3 style={{ fontSize: 'var(--text-xl)', fontWeight: 'var(--font-semibold)', color: 'white', marginBottom: 'var(--space-2)' }}>
                 What happens to my data if I downgrade?
               </h3>
-              <p className="text-gray-600">
+              <p style={{ fontSize: 'var(--text-base)', color: 'rgba(255,255,255,0.8)' }}>
                 Your data stays in your Google Sheet. It's yours forever. You'll just have reduced upload limits.
               </p>
             </div>
 
             <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              <h3 style={{ fontSize: 'var(--text-xl)', fontWeight: 'var(--font-semibold)', color: 'white', marginBottom: 'var(--space-2)' }}>
                 Is my data secure?
               </h3>
-              <p className="text-gray-600">
+              <p style={{ fontSize: 'var(--text-base)', color: 'rgba(255,255,255,0.8)' }}>
                 Yes. We use bank-level encryption. Your data lives in YOUR Google Sheet, which you control. We only write data, never read or share it.
               </p>
             </div>
 
             <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              <h3 style={{ fontSize: 'var(--text-xl)', fontWeight: 'var(--font-semibold)', color: 'white', marginBottom: 'var(--space-2)' }}>
                 Do I need a credit card for the free plan?
               </h3>
-              <p className="text-gray-600">
+              <p style={{ fontSize: 'var(--text-base)', color: 'rgba(255,255,255,0.8)' }}>
                 Nope. Sign up free, no credit card required. Upgrade when you're ready.
               </p>
             </div>
 
             <div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              <h3 style={{ fontSize: 'var(--text-xl)', fontWeight: 'var(--font-semibold)', color: 'white', marginBottom: 'var(--space-2)' }}>
                 Can I get a refund?
               </h3>
-              <p className="text-gray-600">
+              <p style={{ fontSize: 'var(--text-base)', color: 'rgba(255,255,255,0.8)' }}>
                 Yes. 14-day money-back guarantee on all paid plans. Email us and we'll refund you, no questions asked.
               </p>
             </div>
@@ -204,16 +229,22 @@ export default function PricingPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-emerald-600 py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold text-white mb-6">
+      <section style={{ padding: 'var(--space-16) var(--space-6)' }}>
+        <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
+          <h2 style={{ fontSize: 'var(--text-4xl)', fontWeight: 'var(--font-bold)', color: 'white', marginBottom: 'var(--space-6)' }}>
             Ready to stop losing receipts?
           </h2>
-          <p className="text-xl text-emerald-50 mb-8">
+          <p style={{ fontSize: 'var(--text-xl)', color: 'rgba(255,255,255,0.8)', marginBottom: 'var(--space-8)' }}>
             Start free. No credit card required.
           </p>
           <Link href="/signup">
-            <Button size="large" variant="secondary" className="min-w-[200px]">
+            <Button size="large" style={{
+              background: 'linear-gradient(135deg, var(--primary-purple), var(--primary-pink))',
+              border: 'none',
+              padding: 'var(--space-4) var(--space-8)',
+              fontSize: 'var(--text-lg)',
+              minWidth: '200px'
+            }}>
               Start Free Now
             </Button>
           </Link>

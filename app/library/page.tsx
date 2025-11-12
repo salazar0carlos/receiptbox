@@ -137,11 +137,11 @@ export default function LibraryPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #1e1b4b 0%, #581c87 50%, #1e1b4b 100%)' }}>
         <Navbar user={user} />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div style={{ maxWidth: '1400px', margin: '0 auto', padding: 'var(--space-8) var(--space-6)' }}>
           {view === 'grid' ? (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-3" style={{ gap: 'var(--space-6)' }}>
               {[1, 2, 3, 4, 5, 6].map((i) => (
                 <SkeletonCard key={i} />
               ))}
@@ -155,25 +155,25 @@ export default function LibraryPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #1e1b4b 0%, #581c87 50%, #1e1b4b 100%)' }}>
       <Navbar user={user} />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div style={{ maxWidth: '1400px', margin: '0 auto', padding: 'var(--space-8) var(--space-6)' }}>
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 'var(--space-8)', flexWrap: 'wrap', gap: 'var(--space-4)' }}>
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Receipt Library</h1>
-            <p className="text-gray-600">
+            <h1 style={{ fontSize: 'var(--text-4xl)', fontWeight: 'var(--font-bold)', color: 'white', marginBottom: 'var(--space-2)' }}>Receipt Library</h1>
+            <p style={{ fontSize: 'var(--text-lg)', color: 'rgba(255,255,255,0.7)' }}>
               {filteredReceipts.length} {filteredReceipts.length === 1 ? 'receipt' : 'receipts'}
               {selectedReceipts.size > 0 && ` • ${selectedReceipts.size} selected`}
             </p>
           </div>
-          <div className="flex gap-3">
-            <Button variant="secondary" onClick={handleExport} loading={exporting}>
+          <div style={{ display: 'flex', gap: 'var(--space-3)' }}>
+            <Button variant="secondary" onClick={handleExport} loading={exporting} className="glass" style={{ color: 'white' }}>
               <Download className="w-4 h-4 mr-2" />
               Export CSV
             </Button>
-            <Button onClick={() => router.push('/dashboard')}>
+            <Button onClick={() => router.push('/dashboard')} style={{ background: 'linear-gradient(135deg, var(--primary-purple), var(--primary-pink))', border: 'none' }}>
               Upload Receipt
             </Button>
           </div>
@@ -181,27 +181,27 @@ export default function LibraryPage() {
 
         {/* Bulk Actions Bar */}
         {selectedReceipts.size > 0 && (
-          <Card variant="bordered" padding="medium" className="mb-6 bg-emerald-50 border-emerald-200">
-            <div className="flex items-center justify-between">
-              <span className="text-emerald-900 font-medium">
+          <div className="glass-strong" style={{ padding: 'var(--space-4)', borderRadius: 'var(--radius-xl)', border: '1px solid rgba(168, 85, 247, 0.5)', marginBottom: 'var(--space-6)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 'var(--space-4)' }}>
+              <span style={{ color: 'white', fontWeight: 'var(--font-medium)' }}>
                 {selectedReceipts.size} receipt(s) selected
               </span>
-              <div className="flex gap-2">
-                <Button size="small" variant="ghost" onClick={() => setSelectedReceipts(new Set())}>
+              <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
+                <Button size="small" variant="ghost" onClick={() => setSelectedReceipts(new Set())} style={{ color: 'white' }}>
                   Clear
                 </Button>
-                <Button size="small" variant="secondary" onClick={handleBulkDelete}>
+                <Button size="small" variant="secondary" onClick={handleBulkDelete} className="glass" style={{ color: 'white' }}>
                   <Trash2 className="w-4 h-4 mr-2" />
                   Delete Selected
                 </Button>
               </div>
             </div>
-          </Card>
+          </div>
         )}
 
         {/* Filters and View Toggle */}
-        <div className="flex flex-col sm:flex-row gap-4 mb-6">
-          <div className="flex-1">
+        <div style={{ display: 'flex', gap: 'var(--space-4)', marginBottom: 'var(--space-6)', flexWrap: 'wrap' }}>
+          <div style={{ flex: 1, minWidth: '250px' }}>
             <Input
               placeholder="Search receipts..."
               value={searchQuery}
@@ -209,12 +209,13 @@ export default function LibraryPage() {
               icon={<Search className="w-5 h-5" />}
             />
           </div>
-          <div className="flex gap-2">
+          <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
             {filteredReceipts.length > 0 && (
               <Button
                 variant="ghost"
                 onClick={selectAll}
                 size="small"
+                style={{ color: 'white' }}
               >
                 <Check className="w-4 h-4 mr-2" />
                 {selectedReceipts.size === filteredReceipts.length ? 'Deselect All' : 'Select All'}
@@ -224,6 +225,8 @@ export default function LibraryPage() {
               variant={view === 'grid' ? 'primary' : 'secondary'}
               size="small"
               onClick={() => setView('grid')}
+              style={view === 'grid' ? { background: 'linear-gradient(135deg, var(--primary-purple), var(--primary-pink))', border: 'none' } : { color: 'white' }}
+              className={view !== 'grid' ? 'glass' : ''}
             >
               <Grid3x3 className="w-5 h-5" />
             </Button>
@@ -231,6 +234,8 @@ export default function LibraryPage() {
               variant={view === 'list' ? 'primary' : 'secondary'}
               size="small"
               onClick={() => setView('list')}
+              style={view === 'list' ? { background: 'linear-gradient(135deg, var(--primary-purple), var(--primary-pink))', border: 'none' } : { color: 'white' }}
+              className={view !== 'list' ? 'glass' : ''}
             >
               <List className="w-5 h-5" />
             </Button>
@@ -239,144 +244,188 @@ export default function LibraryPage() {
 
         {/* Empty State */}
         {filteredReceipts.length === 0 && (
-          <Card variant="bordered" padding="large" className="text-center">
-            <div className="py-12">
-              <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Search className="w-8 h-8 text-gray-400" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                {searchQuery ? 'No receipts found' : 'No receipts yet'}
-              </h3>
-              <p className="text-gray-600 mb-6">
-                {searchQuery
-                  ? 'Try adjusting your search'
-                  : 'Upload your first receipt to get started'}
-              </p>
-              {!searchQuery && (
-                <Button onClick={() => router.push('/dashboard')}>
-                  Upload Receipt
-                </Button>
-              )}
+          <div className="glass-strong" style={{ padding: 'var(--space-12)', borderRadius: 'var(--radius-2xl)', border: '1px solid rgba(255,255,255,0.2)', textAlign: 'center' }}>
+            <div style={{
+              width: '64px',
+              height: '64px',
+              background: 'rgba(255,255,255,0.1)',
+              borderRadius: '50%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '0 auto var(--space-4)'
+            }}>
+              <Search className="w-8 h-8" style={{ color: 'rgba(255,255,255,0.5)' }} />
             </div>
-          </Card>
+            <h3 style={{ fontSize: 'var(--text-2xl)', fontWeight: 'var(--font-semibold)', color: 'white', marginBottom: 'var(--space-2)' }}>
+              {searchQuery ? 'No receipts found' : 'No receipts yet'}
+            </h3>
+            <p style={{ fontSize: 'var(--text-base)', color: 'rgba(255,255,255,0.7)', marginBottom: 'var(--space-6)' }}>
+              {searchQuery
+                ? 'Try adjusting your search'
+                : 'Upload your first receipt to get started'}
+            </p>
+            {!searchQuery && (
+              <Button onClick={() => router.push('/dashboard')} style={{ background: 'linear-gradient(135deg, var(--primary-purple), var(--primary-pink))', border: 'none' }}>
+                Upload Receipt
+              </Button>
+            )}
+          </div>
         )}
 
         {/* Grid View */}
         {view === 'grid' && filteredReceipts.length > 0 && (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-3" style={{ gap: 'var(--space-6)' }}>
             {filteredReceipts.map((receipt) => (
-              <Card
+              <div
                 key={receipt.id}
-                variant="bordered"
-                padding="none"
-                className="overflow-hidden hover:shadow-md transition-shadow cursor-pointer relative"
+                className="glass-strong"
+                style={{
+                  borderRadius: 'var(--radius-xl)',
+                  border: '1px solid rgba(255,255,255,0.2)',
+                  overflow: 'hidden',
+                  cursor: 'pointer',
+                  position: 'relative',
+                  transition: 'all var(--transition-base)'
+                }}
               >
                 {/* Selection Checkbox */}
-                <div className="absolute top-2 left-2 z-10">
+                <div style={{ position: 'absolute', top: 'var(--space-2)', left: 'var(--space-2)', zIndex: 10 }}>
                   <input
                     type="checkbox"
                     checked={selectedReceipts.has(receipt.id)}
                     onChange={() => toggleSelectReceipt(receipt.id)}
                     onClick={(e) => e.stopPropagation()}
-                    className="w-5 h-5 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                    style={{ width: '20px', height: '20px', cursor: 'pointer', accentColor: 'var(--primary-purple)' }}
                   />
                 </div>
 
                 {/* Sync Status */}
                 {receipt.sheet_id && (
-                  <div className="absolute top-2 right-2 z-10 bg-emerald-600 text-white px-2 py-1 rounded text-xs font-medium">
+                  <div style={{
+                    position: 'absolute',
+                    top: 'var(--space-2)',
+                    right: 'var(--space-2)',
+                    zIndex: 10,
+                    background: 'linear-gradient(135deg, var(--primary-purple), var(--primary-pink))',
+                    color: 'white',
+                    padding: 'var(--space-1) var(--space-2)',
+                    borderRadius: 'var(--radius-base)',
+                    fontSize: 'var(--text-xs)',
+                    fontWeight: 'var(--font-medium)'
+                  }}>
                     Synced
                   </div>
                 )}
 
                 <div onClick={() => setSelectedReceipt(receipt)}>
-                  <div className="aspect-video bg-gray-100 relative">
+                  <div style={{ aspectRatio: '16/9', background: 'rgba(255,255,255,0.05)', position: 'relative' }}>
                     <img
                       src={receipt.image_url}
                       alt={receipt.vendor || 'Receipt'}
-                      className="w-full h-full object-cover"
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     />
                   </div>
-                  <div className="p-4">
-                    <div className="flex items-start justify-between mb-2">
-                      <h3 className="font-semibold text-gray-900 text-lg">
+                  <div style={{ padding: 'var(--space-4)' }}>
+                    <div style={{ display: 'flex', alignItems: 'start', justifyContent: 'space-between', marginBottom: 'var(--space-2)' }}>
+                      <h3 style={{ fontSize: 'var(--text-lg)', fontWeight: 'var(--font-semibold)', color: 'white' }}>
                         {receipt.vendor || 'Unknown Vendor'}
                       </h3>
-                      <span className="text-lg font-bold text-emerald-600">
+                      <span className="gradient-text" style={{ fontSize: 'var(--text-lg)', fontWeight: 'var(--font-bold)' }}>
                         ${receipt.amount?.toFixed(2) || '0.00'}
                       </span>
                     </div>
-                    <div className="flex items-center gap-4 text-sm text-gray-600">
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', fontSize: 'var(--text-sm)', color: 'rgba(255,255,255,0.7)' }}>
                       <span>
                         {receipt.date ? format(new Date(receipt.date), 'MMM d, yyyy') : 'No date'}
                       </span>
-                      <span className="flex items-center gap-1">
+                      <span>
                         {receipt.category || 'Uncategorized'}
                       </span>
                     </div>
                   </div>
                 </div>
-              </Card>
+              </div>
             ))}
           </div>
         )}
 
         {/* List View */}
         {view === 'list' && filteredReceipts.length > 0 && (
-          <Card variant="bordered" padding="none">
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead className="bg-gray-50 border-b border-gray-200">
+          <div className="glass-strong" style={{ borderRadius: 'var(--radius-xl)', border: '1px solid rgba(255,255,255,0.2)', overflow: 'hidden' }}>
+            <div style={{ overflowX: 'auto' }}>
+              <table style={{ width: '100%' }}>
+                <thead style={{ background: 'rgba(255,255,255,0.05)', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
                   <tr>
-                    <th className="px-6 py-3 text-left">
+                    <th style={{ padding: 'var(--space-3) var(--space-6)', textAlign: 'left' }}>
                       <input
                         type="checkbox"
                         checked={selectedReceipts.size === filteredReceipts.length}
                         onChange={selectAll}
-                        className="w-5 h-5 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                        style={{ width: '20px', height: '20px', cursor: 'pointer', accentColor: 'var(--primary-purple)' }}
                       />
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Vendor</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Category</th>
-                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase">Amount</th>
-                    <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase">Status</th>
+                    <th style={{ padding: 'var(--space-3) var(--space-6)', textAlign: 'left', fontSize: 'var(--text-xs)', fontWeight: 'var(--font-medium)', color: 'rgba(255,255,255,0.7)', textTransform: 'uppercase' }}>Date</th>
+                    <th style={{ padding: 'var(--space-3) var(--space-6)', textAlign: 'left', fontSize: 'var(--text-xs)', fontWeight: 'var(--font-medium)', color: 'rgba(255,255,255,0.7)', textTransform: 'uppercase' }}>Vendor</th>
+                    <th style={{ padding: 'var(--space-3) var(--space-6)', textAlign: 'left', fontSize: 'var(--text-xs)', fontWeight: 'var(--font-medium)', color: 'rgba(255,255,255,0.7)', textTransform: 'uppercase' }}>Category</th>
+                    <th style={{ padding: 'var(--space-3) var(--space-6)', textAlign: 'right', fontSize: 'var(--text-xs)', fontWeight: 'var(--font-medium)', color: 'rgba(255,255,255,0.7)', textTransform: 'uppercase' }}>Amount</th>
+                    <th style={{ padding: 'var(--space-3) var(--space-6)', textAlign: 'center', fontSize: 'var(--text-xs)', fontWeight: 'var(--font-medium)', color: 'rgba(255,255,255,0.7)', textTransform: 'uppercase' }}>Status</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200">
-                  {filteredReceipts.map((receipt) => (
+                <tbody>
+                  {filteredReceipts.map((receipt, index) => (
                     <tr
                       key={receipt.id}
-                      className="hover:bg-gray-50 cursor-pointer"
+                      style={{
+                        cursor: 'pointer',
+                        borderTop: index > 0 ? '1px solid rgba(255,255,255,0.1)' : 'none'
+                      }}
                       onClick={() => setSelectedReceipt(receipt)}
                     >
-                      <td className="px-6 py-4" onClick={(e) => e.stopPropagation()}>
+                      <td style={{ padding: 'var(--space-4) var(--space-6)' }} onClick={(e) => e.stopPropagation()}>
                         <input
                           type="checkbox"
                           checked={selectedReceipts.has(receipt.id)}
                           onChange={() => toggleSelectReceipt(receipt.id)}
-                          className="w-5 h-5 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                          style={{ width: '20px', height: '20px', cursor: 'pointer', accentColor: 'var(--primary-purple)' }}
                         />
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                      <td style={{ padding: 'var(--space-4) var(--space-6)', whiteSpace: 'nowrap', fontSize: 'var(--text-sm)', color: 'white' }}>
                         {receipt.date ? format(new Date(receipt.date), 'MMM d, yyyy') : 'No date'}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <td style={{ padding: 'var(--space-4) var(--space-6)', whiteSpace: 'nowrap', fontSize: 'var(--text-sm)', fontWeight: 'var(--font-medium)', color: 'white' }}>
                         {receipt.vendor || 'Unknown Vendor'}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                      <td style={{ padding: 'var(--space-4) var(--space-6)', whiteSpace: 'nowrap', fontSize: 'var(--text-sm)', color: 'rgba(255,255,255,0.8)' }}>
                         {receipt.category || 'Uncategorized'}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-right text-emerald-600">
-                        ${receipt.amount?.toFixed(2) || '0.00'}
+                      <td style={{ padding: 'var(--space-4) var(--space-6)', whiteSpace: 'nowrap', fontSize: 'var(--text-sm)', fontWeight: 'var(--font-semibold)', textAlign: 'right' }}>
+                        <span className="gradient-text">${receipt.amount?.toFixed(2) || '0.00'}</span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-center">
+                      <td style={{ padding: 'var(--space-4) var(--space-6)', whiteSpace: 'nowrap', textAlign: 'center' }}>
                         {receipt.sheet_id ? (
-                          <span className="inline-flex items-center px-2 py-1 bg-emerald-100 text-emerald-800 rounded-full text-xs font-medium">
+                          <span style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            padding: 'var(--space-1) var(--space-2)',
+                            background: 'linear-gradient(135deg, var(--primary-purple), var(--primary-pink))',
+                            color: 'white',
+                            borderRadius: 'var(--radius-full)',
+                            fontSize: 'var(--text-xs)',
+                            fontWeight: 'var(--font-medium)'
+                          }}>
                             Synced
                           </span>
                         ) : (
-                          <span className="inline-flex items-center px-2 py-1 bg-gray-100 text-gray-600 rounded-full text-xs">
+                          <span style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            padding: 'var(--space-1) var(--space-2)',
+                            background: 'rgba(255,255,255,0.1)',
+                            color: 'rgba(255,255,255,0.7)',
+                            borderRadius: 'var(--radius-full)',
+                            fontSize: 'var(--text-xs)'
+                          }}>
                             Not synced
                           </span>
                         )}
@@ -386,7 +435,7 @@ export default function LibraryPage() {
                 </tbody>
               </table>
             </div>
-          </Card>
+          </div>
         )}
       </div>
 
